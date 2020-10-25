@@ -38,7 +38,15 @@ public:
     Hidden(size_t nodes, float (*a)(float), float (*ap)(float)) : bias(nodes, 1), Activation(a), ActivationPrime(ap) {}
     virtual fMat ForwardProp(const fMat &input) const override
     {
-        return input.Transform<true>([this](float v, size_t x, size_t y) { return Activation(v + bias.At(x, 0)); }); //to be replaced
+        fMat res(input.SizeX(), input.SizeY());
+        for (size_t i = 0; i < input.SizeY(); ++i)
+        {
+            for (size_t j = 0; j < input.SizeX(); ++j)
+            {
+                res.At(j, i) = Activation(input.At(j, i) + bias.At(j, 0));
+            }
+        }
+        return res;
     }
 };
 
