@@ -29,7 +29,7 @@ public:
 
 class Hidden : public FC
 {
-private:
+protected:
     fMat bias;
     float (*Activation)(float);
     float (*ActivationPrime)(float);
@@ -50,13 +50,13 @@ public:
     }
 };
 
-class InputWeight : public Weight
+class Input : public Weight
 {
 private:
     size_t expected_input;
 
 public:
-    InputWeight(size_t input_sz, size_t next, double min, double max) : Weight(1, next, min, max), expected_input(input_sz) {}
+    Input(size_t input_sz, size_t next, size_t n_inputs, double min, double max) : Weight(n_inputs, next, min, max), expected_input(input_sz) {}
     virtual fMat ForwardProp(const fMat &input) const override
     {
         if (expected_input != input.SizeY())
@@ -64,3 +64,24 @@ public:
         return Weight::ForwardProp(input);
     }
 };
+
+class Output : public Hidden
+{
+public:
+    Output(size_t nodes, float (*a)(float), float (*ap)(float)) : Hidden(nodes, a, ap) {}
+    virtual fMat ForwardProp(const fMat &input) const override
+    {
+        fMat res(input.SizeX(), 1);
+        for (size_t i = 0; i < input.SizeY(); ++i)
+        {
+            for (size_t j = 0; j < input.SizeX(); ++j)
+            {
+                res.At(j, 0) += Activation(input.At(j, i) + bias.At(j, 0));
+            }
+            res /= input.SizeY();
+        }
+        return res;
+    }
+};
+//to do:
+//improved weight and bias initilization
