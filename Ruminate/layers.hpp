@@ -18,3 +18,16 @@ public:
 
 template <typename T>
 concept LayerType = std::is_base_of<Layer<typename T::type>, T>::value;
+
+template <typename T>
+class IActivationFuncs
+{
+protected:
+    T (*Activation)
+    (T);
+    T (*ActivationPrime)
+    (T);
+
+public:
+    IActivationFuncs(T (*a)(T), T (*ap)(T)) : Activation(a), ActivationPrime(ap) {}
+};
