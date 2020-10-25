@@ -48,7 +48,7 @@ private:
     size_t expected_input;
 
 public:
-    InputWeight(size_t next, size_t input_sz, double min, double max) : Weight(1, next, min, max), expected_input(input_sz) {}
+    InputWeight(size_t input_sz, size_t next, double min, double max) : Weight(1, next, min, max), expected_input(input_sz) {}
     virtual fMat ForwardProp(const fMat &input) const override
     {
         if (expected_input != input.SizeY())
