@@ -27,6 +27,20 @@ public:
         return res;
     }
 
+    RT Cost(const RT &guess, const RT &anwser) const
+    {
+        RT res(guess.SizeX(), guess.SizeY());
+        for (size_t i = 0; i < guess.Area(); ++i)
+        {
+            res.FastAt(i) = 0.5 * ((guess.FastAt(i) - anwser.FastAt(i)) * (guess.FastAt(i) - anwser.FastAt(i)));
+        }
+        return res;
+    }
+    RT CostPrime(const RT &guess, const RT &anwser) const
+    {
+        return guess - anwser;
+    }
+
     ~NeuralNetwork()
     {
         for (size_t i = 0; i < sz; ++i)
