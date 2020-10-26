@@ -19,7 +19,6 @@ public:
         {
             values.FastAt(i) = min + (p.nextFloat() * (max - min));
         }
-        std::cout << values;
     }
     virtual MLMat ForwardProp(const MLMat &input) const override
     {
@@ -60,7 +59,7 @@ private:
     uint16_t expected_input;
 
 public:
-    Input(uint16_t input_sz, uint16_t next, uint16_t n_inputs, float min, float max, pcg32 &p) : Weight(n_inputs, next, min, max, p), expected_input(input_sz) {}
+    Input(uint16_t n_inputs, uint16_t input_sz, uint16_t next, float min, float max, pcg32 &p) : Weight(input_sz, next, min, max, p), expected_input(n_inputs) {}
     virtual MLMat ForwardProp(const MLMat &input) const override
     {
         if (expected_input != input.SizeY())
