@@ -1,5 +1,5 @@
 # Ruminate
-a lightweight, performance-focused, generic ML library for C++. Written in C++20
+a lightweight, performance-focused, generic ML library for C++.
 
 # Features
 
