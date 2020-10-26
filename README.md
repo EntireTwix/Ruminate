@@ -5,7 +5,6 @@ an ML library that aims to be lightweight, fast, and generic.
 * polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * Activation functions: Relu,Sigmoid,Tanh,Swish
 * fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
-* multiple inputs per forward prop support
 
 # :construction:In Progress
 * FC layers
