@@ -1,5 +1,5 @@
 # Ruminate
-a lightweight, performance-focused, generic ML library for C++.
+an ML library that aims to be lightweight, fast, and generic. 
 
 # Features
 * :sparkles:polymorphically based NeuralNetwork
