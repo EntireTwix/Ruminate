@@ -16,3 +16,7 @@ an ML library that aims to be lightweight, fast, and generic. Written in and for
 * :sparkles: convalutions and pooling
 * :sparkles: optimizer argument for network
 * :racehorse: GPU integration
+
+# Dependencies
+* mat.h    from EntireTwix/OptimizedHeaders
+* pcg32.h  from wjakob/pcg32
