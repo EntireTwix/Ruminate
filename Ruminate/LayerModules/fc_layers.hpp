@@ -2,8 +2,8 @@
 #include <random>
 #include <ctime>
 #include "../layers.hpp"
-#include "../../MiscHeaderFiles-master/mat.h"
-#include "../pcg32.hpp"
+#include "../../../OptimizedHeaders-main/mat.h"
+#include "../../../pcg32-master/pcg32.h"
 
 using FC = Layer<MLMat>;
 
@@ -13,12 +13,13 @@ private:
     MLMat values;
 
 public:
-    Weight(uint16_t prev, uint16_t next, double min, double max, pcg32 &p) : values(next, prev)
+    Weight(uint16_t prev, uint16_t next, float min, float max, pcg32 &p) : values(next, prev)
     {
         for (uint16_t i = 0; i < values.Area(); ++i)
         {
-            values.FastAt(i) = p.nextFloat();
+            values.FastAt(i) = min + (p.nextFloat() * (max - min));
         }
+        std::cout << values;
     }
     virtual MLMat ForwardProp(const MLMat &input) const override
     {
@@ -32,11 +33,11 @@ protected:
     MLMat bias;
 
 public:
-    Hidden(uint16_t nodes, float (*a)(float), float (*ap)(float), pcg32 &p) : IActivationFuncs(a, ap), bias(nodes, 1)
+    Hidden(uint16_t nodes, float (*a)(float), float (*ap)(float), float min, float max, pcg32 &p) : IActivationFuncs(a, ap), bias(nodes, 1)
     {
         for (uint16_t i = 0; i < bias.Area(); ++i)
         {
-            bias.FastAt(i) = p.nextFloat();
+            bias.FastAt(i) = min + (p.nextFloat() * (max - min));
         }
     }
     virtual MLMat ForwardProp(const MLMat &input) const override
@@ -59,7 +60,7 @@ private:
     uint16_t expected_input;
 
 public:
-    Input(uint16_t input_sz, uint16_t next, uint16_t n_inputs, double min, double max, pcg32 &p) : Weight(n_inputs, next, min, max, p), expected_input(input_sz) {}
+    Input(uint16_t input_sz, uint16_t next, uint16_t n_inputs, float min, float max, pcg32 &p) : Weight(n_inputs, next, min, max, p), expected_input(input_sz) {}
     virtual MLMat ForwardProp(const MLMat &input) const override
     {
         if (expected_input != input.SizeY())
