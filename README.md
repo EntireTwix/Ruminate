@@ -13,6 +13,5 @@ an ML library that aims to be lightweight, fast, and generic.
 * dropout layer
 * helper functions for weight/bias init
 * :sparkles: convalutions and pooling
-* more activation functions
 * :sparkles: optimizer argument for network
 * :racehorse: GPU integration
