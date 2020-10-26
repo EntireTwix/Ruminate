@@ -2,7 +2,7 @@
 an ML library that aims to be lightweight, fast, and generic. 
 
 # Features
-* :sparkles:polymorphically based NeuralNetwork with constrained template argument
+* :sparkles:polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * Activation Funcs Relu,Sigmoid,Tanh,Swish
 
 # :construction:In Progress
