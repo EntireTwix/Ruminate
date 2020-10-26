@@ -28,7 +28,7 @@ namespace rum
         }
     };
 
-    class Hidden : public FC, public virtual IActivationFuncs<float>
+    class Hidden : public FC, public IActivationFuncs<float>
     {
     protected:
         MLMat bias;
@@ -57,17 +57,13 @@ namespace rum
 
     class Input : public Weight
     {
-    private:
-        uint16_t expected_input;
-
     public:
-        Input(uint16_t n_inputs, uint16_t input_sz, uint16_t next, float min, float max, pcg32 &p) : Weight(input_sz, next, min, max, p), expected_input(n_inputs) {}
-        virtual MLMat ForwardProp(const MLMat &input) const override
-        {
-            if (expected_input != input.SizeY())
-                throw std::invalid_argument("input dimensions must match the expected input size");
-            return Weight::ForwardProp(input);
-        }
+        Input(uint16_t n_inputs, uint16_t input_sz, uint16_t next, float min, float max, pcg32 &p) : Weight(input_sz, next, min, max, p) {}
     };
 
+    class Output : public Hidden
+    {
+    public:
+        Output(uint16_t nodes, float (*a)(float), float (*ap)(float), float min, float max, pcg32 &p) : Hidden(nodes, a, ap, min, max, p) {}
+    };
 } // namespace rum
