@@ -2,14 +2,13 @@
 an ML library that aims to be lightweight, fast, and generic. 
 
 # Features
-* :sparkles:polymorphically based NeuralNetwork
-* :sparkles:LayerType concept for compile time check of future types
+* :sparkles:polymorphically based NeuralNetwork with constrained template argument
 
 # :construction:In Progress
-* FC
+* FC layers
 
 # Future Features
-* dropout
-* convalutions
+* dropout layer
+* :sparkles:convalutions
 * generic optimizer as network argument
-* GPU integration
+* :sparkles:GPU integration
