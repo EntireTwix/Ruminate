@@ -1,27 +1,26 @@
 #pragma once
-#include "../layers.hpp"
-#include "../../MiscHeaderFiles-master/mat.h"
 #include <random>
 #include <ctime>
+#include "../layers.hpp"
+#include "../../MiscHeaderFiles-master/mat.h"
+#include "../pcg32.hpp"
 
-using FC = Layer<fMat>;
+using FC = Layer<MLMat>;
 
 class Weight : public FC
 {
 private:
-    fMat values;
+    MLMat values;
 
 public:
-    Weight(size_t prev, size_t next, double min, double max) : values(next, prev)
+    Weight(uint16_t prev, uint16_t next, double min, double max, pcg32 &p) : values(next, prev)
     {
-        std::default_random_engine generator(time(NULL));
-        std::uniform_real_distribution<double> distribution(min, max);
-        for (size_t i = 0; i < values.Area(); ++i)
+        for (uint16_t i = 0; i < values.Area(); ++i)
         {
-            values.FastAt(i) = distribution(generator);
+            values.FastAt(i) = p.nextFloat();
         }
     }
-    virtual fMat ForwardProp(const fMat &input) const override
+    virtual MLMat ForwardProp(const MLMat &input) const override
     {
         return input.Dot(values);
     }
@@ -30,16 +29,22 @@ public:
 class Hidden : public FC, public virtual IActivationFuncs<float>
 {
 protected:
-    fMat bias;
+    MLMat bias;
 
 public:
-    Hidden(size_t nodes, float (*a)(float), float (*ap)(float)) : IActivationFuncs(a, ap), bias(nodes, 1) {}
-    virtual fMat ForwardProp(const fMat &input) const override
+    Hidden(uint16_t nodes, float (*a)(float), float (*ap)(float), pcg32 &p) : IActivationFuncs(a, ap), bias(nodes, 1)
     {
-        fMat res(input.SizeX(), input.SizeY());
-        for (size_t i = 0; i < input.SizeY(); ++i)
+        for (uint16_t i = 0; i < bias.Area(); ++i)
         {
-            for (size_t j = 0; j < input.SizeX(); ++j)
+            bias.FastAt(i) = p.nextFloat();
+        }
+    }
+    virtual MLMat ForwardProp(const MLMat &input) const override
+    {
+        MLMat res(input.SizeX(), input.SizeY());
+        for (uint16_t i = 0; i < input.SizeY(); ++i)
+        {
+            for (uint16_t j = 0; j < input.SizeX(); ++j)
             {
                 res.At(j, i) = Activation(input.At(j, i) + bias.At(j, 0));
             }
@@ -51,11 +56,11 @@ public:
 class Input : public Weight
 {
 private:
-    size_t expected_input;
+    uint16_t expected_input;
 
 public:
-    Input(size_t input_sz, size_t next, size_t n_inputs, double min, double max) : Weight(n_inputs, next, min, max), expected_input(input_sz) {}
-    virtual fMat ForwardProp(const fMat &input) const override
+    Input(uint16_t input_sz, uint16_t next, uint16_t n_inputs, double min, double max, pcg32 &p) : Weight(n_inputs, next, min, max, p), expected_input(input_sz) {}
+    virtual MLMat ForwardProp(const MLMat &input) const override
     {
         if (expected_input != input.SizeY())
             throw std::invalid_argument("input dimensions must match the expected input size");
