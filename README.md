@@ -1,5 +1,5 @@
 # Ruminate
-an ML library that aims to be lightweight, fast, and generic. 
+an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
 # Features
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
