@@ -11,4 +11,4 @@ an ML library that aims to be lightweight, fast, and generic.
 * dropout layer
 * :sparkles:convalutions
 * generic optimizer as network argument
-* :sparkles:GPU integration
+* :racehorse:GPU integration
