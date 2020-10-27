@@ -22,12 +22,27 @@ namespace rum
         {
             std::vector<RT> res(sz);
             res[0] = layers[0]->ForwardProp(input);
-            std::cout << res[0] << '\n';
+            std::cout << res[0] << '\n'; //debugging
             for (size_t i = 1; i < res.size(); ++i)
             {
                 res[i] = layers[i]->ForwardProp(res[i - 1]); //result 1 = 1th layer propogated with 0th result
-                std::cout << res[i] << '\n';
+                std::cout << res[i] << '\n';                 //debugging
             }
+            return res;
+        }
+
+        //in progress
+        std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, const RT &guess, const RT &anwser, float lr)
+        {
+            std::vector<RT> res(sz);
+            RT cost = CostPrime(guess, anwser) * lr; //not optimal
+
+            std::cout << cost << '\n';
+            res[sz - 1] = layers[sz - 1]->BackwardProp(cost, forwardRes, layers, sz - 1);
+            std::cout << res[sz - 1] << '\n';
+            res[sz - 2] = layers[sz - 2]->BackwardProp(cost, forwardRes, layers, sz - 2);
+            std::cout << res[sz - 2] << '\n';
+
             return res;
         }
 
