@@ -2,7 +2,7 @@
 #include <random>
 #include <ctime>
 #include "../layers.hpp"
-#include "../../../OptimizedHeaders-main/mat.h"
+#include "../../../OptimizedHeaders-main/mat.hpp"
 #include "../../../pcg32-master/pcg32.h"
 
 namespace rum
@@ -22,9 +22,11 @@ namespace rum
                 values.FastAt(i) = min + (p.nextFloat() * (max - min));
             }
         }
-        virtual MLMat ForwardProp(const MLMat &input) const override
+        virtual MLMat &internal() { return values; }
+        virtual MLMat ForwardProp(const MLMat &input) const override { return input.Dot(values); }
+        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, Layer **layers, size_t index) const override
         {
-            return input.Dot(values);
+            return forwardRes[index - 1].VecMult(cost);
         }
     };
 
@@ -41,6 +43,7 @@ namespace rum
                 bias.FastAt(i) = min + (p.nextFloat() * (max - min));
             }
         }
+        virtual MLMat &internal() override { return bias; }
         virtual MLMat ForwardProp(const MLMat &input) const override
         {
             MLMat res(input.SizeX(), input.SizeY());
@@ -65,5 +68,9 @@ namespace rum
     {
     public:
         Output(uint16_t nodes, float (*a)(float), float (*ap)(float), float min, float max, pcg32 &p) : Hidden(nodes, a, ap, min, max, p) {}
+        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, Layer **layers, size_t index) const override
+        {
+            return cost *= forwardRes[index].Transform(ActivationPrime); //will be optimized later
+        }
     };
 } // namespace rum
