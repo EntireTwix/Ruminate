@@ -14,6 +14,8 @@ namespace rum
         using type = T;
 
         virtual T ForwardProp(const T &) const = 0;
+        virtual T BackwardProp(T &cost, const std::vector<T> &forwardRes, Layer **layers, size_t index) const { return cost; }
+        virtual T &internal() = 0;
     };
 
     template <typename T>
