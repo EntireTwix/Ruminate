@@ -11,7 +11,7 @@ namespace rum
 
     class Weight : public FC
     {
-    private:
+    protected:
         MLMat values;
 
     public:
@@ -23,10 +23,9 @@ namespace rum
             }
         }
         virtual MLMat &internal() { return values; }
-        virtual MLMat ForwardProp(const MLMat &input) const override { return input.Dot(values); }
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, Layer **layers, size_t index) const override
+        virtual MLMat ForwardProp(const MLMat &input) const override
         {
-            return forwardRes[index - 1].VecMult(cost);
+            return input.Dot(values);
         }
     };
 
@@ -58,19 +57,9 @@ namespace rum
         }
     };
 
-    class Input : public Weight
-    {
-    public:
-        Input(uint16_t n_inputs, uint16_t input_sz, uint16_t next, float min, float max, pcg32 &p) : Weight(input_sz, next, min, max, p) {}
-    };
-
     class Output : public Hidden
     {
     public:
         Output(uint16_t nodes, float (*a)(float), float (*ap)(float), float min, float max, pcg32 &p) : Hidden(nodes, a, ap, min, max, p) {}
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, Layer **layers, size_t index) const override
-        {
-            return cost *= forwardRes[index].Transform(ActivationPrime); //will be optimized later
-        }
     };
 } // namespace rum
