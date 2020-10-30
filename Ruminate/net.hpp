@@ -22,11 +22,11 @@ namespace rum
         {
             std::vector<RT> res(sz);
             res[0] = layers[0]->ForwardProp(input);
-            std::cout << res[0] << '\n'; //debugging
+            //std::cout << res[0] << '\n'; //debugging
             for (size_t i = 1; i < res.size(); ++i)
             {
                 res[i] = layers[i]->ForwardProp(res[i - 1]); //result 1 = 1th layer propogated with 0th result
-                std::cout << res[i] << '\n';                 //debugging
+                //std::cout << res[i] << '\n';                 //debugging
             }
             return res;
         }
@@ -35,16 +35,22 @@ namespace rum
             std::vector<RT> res(sz);
             RT cost = CostPrime(guess, anwser) * lr; //not optimal
 
-            std::cout << "\nBackProp:\n";
-            std::cout << cost << '\n';
+            //std::cout << "\nBackProp:\n" << cost << '\n';
             for (uint8_t i = sz - 1; i > 0; --i)
             {
                 res[i] = layers[i]->BackwardProp(cost, forwardRes, layers, i);
-                std::cout << "{\nCorrection:\n"
-                          << res[i] << "\nOriginal:\n"
-                          << layers[i]->internal() << "}\n\n";
+                // std::cout << "{\nCorrection:\n"
+                //           << res[i] << "\nOriginal:\n"
+                //           << layers[i]->internal() << "}\n\n";
             }
             return res;
+        }
+        void Learn(const std::vector<RT> &backRes)
+        {
+            for (uint8_t i = 1; i < sz; ++i)
+            {
+                layers[i]->internal() -= backRes[i];
+            }
         }
 
         RT Cost(const RT &guess, const RT &anwser) const
