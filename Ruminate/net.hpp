@@ -8,7 +8,7 @@ namespace rum
     {
     private:
         T **layers = nullptr;
-        size_t sz;
+        uint8_t sz;
         using RT = typename T::type; //representation type, for example: fMat
 
     public:
@@ -30,19 +30,20 @@ namespace rum
             }
             return res;
         }
-
-        //in progress
         std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, const RT &guess, const RT &anwser, float lr)
         {
             std::vector<RT> res(sz);
             RT cost = CostPrime(guess, anwser) * lr; //not optimal
 
+            std::cout << "\nBackProp:\n";
             std::cout << cost << '\n';
-            res[sz - 1] = layers[sz - 1]->BackwardProp(cost, forwardRes, layers, sz - 1);
-            std::cout << res[sz - 1] << '\n';
-            res[sz - 2] = layers[sz - 2]->BackwardProp(cost, forwardRes, layers, sz - 2);
-            std::cout << res[sz - 2] << '\n';
-
+            for (uint8_t i = sz - 1; i > 0; --i)
+            {
+                res[i] = layers[i]->BackwardProp(cost, forwardRes, layers, i);
+                std::cout << "{\nCorrection:\n"
+                          << res[i] << "\nOriginal:\n"
+                          << layers[i]->internal() << "}\n\n";
+            }
             return res;
         }
 
