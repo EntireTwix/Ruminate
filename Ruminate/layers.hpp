@@ -13,7 +13,7 @@ namespace rum
     public:
         using type = T;
 
-        virtual T ForwardProp(const T &) const = 0;
+        virtual T ForwardProp(const T &input) { return input; }
         virtual T BackwardProp(T &cost, const std::vector<T> &forwardRes, Layer **layers, size_t index) const { return cost; }
         virtual T &internal() = 0;
     };
