@@ -3,10 +3,12 @@ an ML library that aims to be lightweight, fast, and generic. Written in and for
 
 # Features
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
-* Activation functions: Relu,Sigmoid,Tanh,Swish
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
-* variable batch size
+
+Essential
 * FC layers
+* Activation functions: Relu,Sigmoid,Tanh,Swish
+* variable batch size
 
 # :construction:In Progress
 * saving functionality
