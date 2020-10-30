@@ -6,13 +6,13 @@ an ML library that aims to be lightweight, fast, and generic. Written in and for
 * Activation functions: Relu,Sigmoid,Tanh,Swish
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
 * variable batch size
-
-# :construction:In Progress
 * FC layers
 
-# Future Features
+# :construction:In Progress
 * dropout layer
 * helper functions for weight/bias init
+
+# Future Features
 * network saving functionality
 * :sparkles: convalutions and pooling
 * :sparkles: optimizer argument for network
