@@ -9,6 +9,7 @@ an ML library that aims to be lightweight, fast, and generic. Written in and for
 * FC layers
 
 # :construction:In Progress
+* saving functionality
 * dropout layer
 * helper functions for weight/bias init
 
