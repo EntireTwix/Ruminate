@@ -29,12 +29,12 @@ namespace rum
         }
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            std::cout << "W\n";
+            //std::cout << "W\n";
             return weights.Dot(input);
         }
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, FC **layers, size_t index) const override
         {
-            std::cout << "W\n";
+            //std::cout << "W\n";
             return cost.Dot(forwardRes[index - 1]);
         }
     };
@@ -59,7 +59,7 @@ namespace rum
         }
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            std::cout << "H\n";
+            //std::cout << "H\n";
             MLMat res(input.SizeX(), input.SizeY());
             for (uint16_t i = 0; i < input.SizeY(); ++i)
             {
@@ -72,7 +72,7 @@ namespace rum
         }
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, FC **layers, size_t index) const override
         {
-            std::cout << "H\n";
+            //std::cout << "H\n";
             return cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1].Transform(ActivationPrime);
         }
     };
@@ -89,7 +89,7 @@ namespace rum
         }
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            std::cout << "I\n";
+            //std::cout << "I\n";
             return inp = input;
         }
     };
@@ -100,7 +100,7 @@ namespace rum
         Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float b_min, float b_max, pcg32 &rng) : Hidden(hidden_nodes, a, ap, b_min, b_max, rng) {}
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, FC **layers, size_t index) const override
         {
-            std::cout << "O\n";
+            //std::cout << "O\n";
             return cost = forwardRes[index].Transform(ActivationPrime) * cost;
         }
     };
