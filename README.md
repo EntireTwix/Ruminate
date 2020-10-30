@@ -14,7 +14,6 @@ an ML library that aims to be lightweight, fast, and generic. Written in and for
 * helper functions for weight/bias init
 
 # Future Features
-* network saving functionality
 * :sparkles: convalutions and pooling
 * :sparkles: optimizer argument for network
 * :racehorse: GPU integration
