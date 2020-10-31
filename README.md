@@ -11,12 +11,12 @@ Essential:
 * variable batch size
 
 # :construction:In Progress
+* :sparkles: convolutions and pooling
 * saving functionality
 * dropout layer
 * helper functions for weight/bias init
 
 # Future Features
-* :sparkles: convalutions and pooling
 * :sparkles: optimizer argument for network
 * :racehorse: GPU integration
 
