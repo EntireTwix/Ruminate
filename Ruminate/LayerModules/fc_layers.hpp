@@ -73,7 +73,7 @@ namespace rum
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, FC **layers, size_t index) const override
         {
             //std::cout << "H\n";
-            return cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1].Transform(ActivationPrime);
+            return cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1].Transform(ActivationPrime); //to be optimized
         }
     };
 
@@ -101,7 +101,7 @@ namespace rum
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, FC **layers, size_t index) const override
         {
             //std::cout << "O\n";
-            return cost = forwardRes[index].Transform(ActivationPrime) * cost;
+            return cost = forwardRes[index].Transform(ActivationPrime) * cost; //to be optimized
         }
     };
 } // namespace rum
