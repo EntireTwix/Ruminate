@@ -12,10 +12,11 @@ Essential:
 * saving/loading functionality
 
 Other:
+* dropout layer
 
 # :construction:In Progress
+* :racehorse: forwardprop arg reference
 * :sparkles: convolutions and pooling
-* dropout layer
 * helper functions for weight/bias init
 
 # Future Features
