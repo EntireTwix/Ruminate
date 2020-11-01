@@ -12,7 +12,7 @@ Essential:
 * saving/loading functionality
 
 Other:
-* dropout for hidden layer
+* dropout variants for input&hidden layers
 
 # :construction:In Progress
 * :sparkles: convolutions and pooling
