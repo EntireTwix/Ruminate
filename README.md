@@ -10,16 +10,18 @@ Essential:
 * Activation functions: Relu,Sigmoid,Tanh,Swish
 * variable batch size
 
+Other:
+* saving functionality
+
 # :construction:In Progress
 * :sparkles: convolutions and pooling
-* saving functionality
 * dropout layer
 * helper functions for weight/bias init
 
 # Future Features
 * batch normalization
-* :sparkles: optimizer argument for network
-* :racehorse: GPU integration
+* :sparkles: optimizer argument for network (like Adam for example)
+* :racehorse: GPU or SIMD integration (to be tested)
 
 # Dependencies
 * mat.h    from EntireTwix/OptimizedHeaders
