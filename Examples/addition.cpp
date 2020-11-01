@@ -20,7 +20,7 @@ int main()
     while (1)
     {
         system("CLS");
-        net.Save();
+        std::cout << net.Save() << '\n';
 
         data.At(0, 0) = rng.nextUInt(100);
         data.At(0, 1) = rng.nextUInt(100);
