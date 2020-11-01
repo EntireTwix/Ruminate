@@ -52,7 +52,13 @@ namespace rum
                 layers[i]->internal() -= backRes[i];
             }
         }
-
+        void Save()
+        {
+            for (uint8_t i = 1; i < sz; ++i)
+            {
+                std::cout << layers[i]->internal() << '\n';
+            }
+        }
         RT Cost(const RT &guess, const RT &anwser) const
         {
             RT res(guess.SizeX(), guess.SizeY());
