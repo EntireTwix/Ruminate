@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../Ruminate-main/Ruminate/net.hpp"
-#include "../Ruminate-main/Ruminate/LayerModules/fc_layers.hpp"
+#include "../Ruminate-main/Ruminate/LayerModules/ann_layers.hpp"
 #include "../Ruminate-main/Ruminate/HelperFiles/a_funcs.hpp"
 
 using namespace rum;
@@ -8,11 +8,9 @@ using namespace rum;
 int main()
 {
     pcg32 rng(time(NULL) << 8, time(NULL) >> 8);
-    NeuralNetwork<FC> net{
+    NeuralNetwork<ANN> net{
         new Input(),
-        new Weight(2, 3, 0, 1, rng),
-        new Hidden(3, Relu, ReluPrime, 0, 1, rng),
-        new Weight(3, 1, 0, 1, rng),
+        new Weight(2, 1, 0, 1, rng),
         new Output(1, Relu, ReluPrime, 0, 1, rng),
     };
 
@@ -22,6 +20,7 @@ int main()
     while (1)
     {
         system("CLS");
+        net.Save();
 
         data.At(0, 0) = rng.nextUInt(100);
         data.At(0, 1) = rng.nextUInt(100);
@@ -31,11 +30,11 @@ int main()
                   << "Anwser:\n"
                   << anw << '\n';
         auto res = net.ForwardProp(data);
-        std::cout << res.back() << "Cost:\n"
-                  << net.Cost(res.back(), anw);
+        std::cout << res.back() << "\nCost:\n"
+                  << net.Cost(res.back(), anw) << '\n';
         auto corrections = net.BackwordProp(res, res.back(), anw, 0.00001);
         net.Learn(corrections);
-        
+
         //hold enter to see training progress
         std::cin.get();
     }
