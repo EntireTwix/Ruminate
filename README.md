@@ -17,6 +17,7 @@ Essential:
 * helper functions for weight/bias init
 
 # Future Features
+* batch normalization
 * :sparkles: optimizer argument for network
 * :racehorse: GPU integration
 
