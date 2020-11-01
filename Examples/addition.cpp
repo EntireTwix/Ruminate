@@ -9,7 +9,7 @@ int main()
 {
     pcg32 rng(time(NULL) << 8, time(NULL) >> 8);
     NeuralNetwork<ANN> net{
-        new Input(),
+        new Input(2),
         new Weight(2, 1, 0, 1, rng),
         new Output(1, Relu, ReluPrime, 0, 1, rng),
     };
