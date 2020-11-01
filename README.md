@@ -15,7 +15,7 @@ Other:
 * dropout layer
 
 # :construction:In Progress
-* :racehorse: forwardprop arg reference
+* :racehorse: forwardprop arg as reference, similiar to how backprop works
 * :sparkles: convolutions and pooling
 * helper functions for weight/bias init
 
