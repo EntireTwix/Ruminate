@@ -11,7 +11,7 @@ Essential:
 * variable batch size
 
 Other:
-* saving functionality
+* saving/loading functionality
 
 # :construction:In Progress
 * :sparkles: convolutions and pooling
