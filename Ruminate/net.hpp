@@ -1,4 +1,5 @@
 #pragma once
+#include <numeric>
 #include "layers.hpp"
 
 namespace rum
@@ -52,12 +53,14 @@ namespace rum
                 layers[i]->internal() -= backRes[i];
             }
         }
-        void Save()
+        std::string Save()
         {
+            std::string res;
             for (uint8_t i = 1; i < sz; ++i)
             {
-                std::cout << layers[i]->internal() << '\n';
+                res += layers[i]->internal().Save() + '\n';
             }
+            return res;
         }
         RT Cost(const RT &guess, const RT &anwser) const
         {
