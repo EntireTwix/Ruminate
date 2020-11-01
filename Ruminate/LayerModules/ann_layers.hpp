@@ -15,6 +15,24 @@ namespace rum
 {
     using ANN = Layer<MLMat>;
 
+    class Input : public ANN
+    {
+    protected:
+        MLMat inp;
+
+    public:
+        Input(uint8_t input_sz) : inp(1, input_sz) {}
+        virtual MLMat &internal()
+        {
+            return inp;
+        }
+        virtual MLMat ForwardProp(const MLMat &input) override
+        {
+            //std::cout << "I\n";
+            return inp = input;
+        }
+    };
+
     class Weight : public ANN
     {
     protected:
@@ -87,23 +105,6 @@ namespace rum
         }
     };
 
-    class Input : public ANN
-    {
-    protected:
-        MLMat inp;
-
-    public:
-        virtual MLMat &internal()
-        {
-            return inp;
-        }
-        virtual MLMat ForwardProp(const MLMat &input) override
-        {
-            //std::cout << "I\n";
-            return inp = input;
-        }
-    };
-
     class Output : public Hidden
     {
     public:
@@ -115,15 +116,40 @@ namespace rum
         }
     };
 
-    class HiddenDrop : public Hidden
+    class IDrop //interface for dropout layers
     {
-    private:
+    protected:
         pcg32 generator;
         MLMat t_vals;
         float threshold;
 
     public:
-        HiddenDrop(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float b_min, float b_max, float thres, pcg32 &rng, auto &&... saved_params) : Hidden(hidden_nodes, a, ap, b_min, b_max, rng, saved_params...), t_vals(hidden_nodes, 1), generator(rng), threshold(thres) {}
+        IDrop(uint16_t hidden_nodes, pcg32 &rng, float thres) : t_vals(hidden_nodes, 1), generator(rng), threshold(thres) {}
+    };
+
+    class InputDrop : public Input, public IDrop
+    {
+    public:
+        InputDrop(uint8_t input_sz, float thres, pcg32 &rng) : Input(input_sz), IDrop(input_sz, rng, thres) {}
+        virtual MLMat &internal()
+        {
+            return inp;
+        }
+        virtual MLMat ForwardProp(const MLMat &input) override
+        {
+            //std::cout << "Id\n";
+            for (uint32_t i = 0; i < input.Area(); ++i)
+            {
+                inp.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = generator.nextFloat() > threshold);
+            }
+            return inp;
+        }
+    };
+
+    class HiddenDrop : public Hidden, public IDrop
+    {
+    public:
+        HiddenDrop(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float b_min, float b_max, float thres, pcg32 &rng, auto &&... saved_params) : Hidden(hidden_nodes, a, ap, b_min, b_max, rng, saved_params...), IDrop(hidden_nodes, rng, thres) {}
         virtual MLMat ForwardProp(const MLMat &input) override
         {
             //std::cout << "Hd\n";
