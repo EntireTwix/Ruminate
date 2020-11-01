@@ -2,20 +2,20 @@
 #include <concepts>
 #include <type_traits>
 #include <vector>
+#include "../../OptimizedHeaders-main/mat.hpp"
 
 namespace rum
 {
-
     //an abstract type that is used polymorphically in net.h
-    template <typename T>
+    template <Matrix M>
     class Layer
     {
     public:
-        using type = T;
+        using type = M;
 
-        virtual T ForwardProp(const T &input) { return input; }
-        virtual T BackwardProp(T &cost, const std::vector<T> &forwardRes, Layer **layers, size_t index) const { return cost; }
-        virtual T &internal() = 0;
+        virtual M ForwardProp(const M &input) { return input; } //maybe could be made reference
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const { return cost; }
+        virtual M &internal() = 0;
     };
 
     template <typename T>
