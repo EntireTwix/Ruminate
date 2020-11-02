@@ -5,12 +5,6 @@
 #include "../../../OptimizedHeaders-main/mat.hpp"
 #include "../../../pcg32-master/pcg32.h"
 
-//weight
-//hidden
-//input
-//output
-//hidden w/dropout
-
 namespace rum
 {
     using ANN = Layer<MLMat>;
