@@ -16,10 +16,10 @@ Other:
 * dropout variants for input&hidden layers
 
 # :construction:In Progress
-* :sparkles: convolutions and pooling
 * helper functions for weight/bias init
 
 # Future Features
+* :sparkles: convolutions and pooling
 * batch normalization
 * :sparkles: optimizer argument for network (like Adam for example)
 * :racehorse: GPU or SIMD integration (to be tested)
