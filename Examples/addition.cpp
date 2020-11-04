@@ -8,10 +8,11 @@ using namespace rum;
 
 int main()
 {
+
     NeuralNetwork<ANN> net{
-        new Input(2),                      //2 node input
-        new Weight(2, 1, new HeWeight(2)), //2x1 weights
-        new Output(1, Relu, ReluPrime),    //1 output node
+        new Input(2),                             //2 node input
+        new Weight(2, 1, new RngInit()),          //2x1 weights
+        new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
 
     MLMat data(1, 2);
