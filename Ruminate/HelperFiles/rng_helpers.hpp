@@ -23,16 +23,4 @@ namespace rum
         }
     };
 
-    class HeWeight : public RngInit
-    {
-    public:
-        HeWeight(float size_l) : RngInit(size_l, size_l + 1) {}
-        virtual void Generator(MLMat &mat) const
-        {
-            for (uint32_t i = 0; i < mat.Area(); ++i)
-            {
-                mat.FastAt(i) = ((gen.nextFloat() * this->highest) + this->lowest) * sqrtf(2 / highest);
-            }
-        }
-    };
 }; // namespace rum
