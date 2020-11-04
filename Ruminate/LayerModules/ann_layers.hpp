@@ -2,7 +2,6 @@
 #include <random>
 #include <ctime>
 #include "../layers.hpp"
-#include "../../../OptimizedHeaders-main/mat.hpp"
 #include "../HelperFiles/rng_helpers.hpp"
 
 namespace rum
