@@ -23,14 +23,14 @@ int main()
  ```
 
 # Features
-### Implementation:
+#### Implementation:
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
-### Essential:
+#### Essential:
 * FC layers
 * Activation functions: Relu,Sigmoid,Tanh,Swish
 * saving/loading functionality
-### Other:
+#### Other:
 * dropout variants for input&hidden layers
 * helper functions for weight/bias init
 
