@@ -32,7 +32,7 @@ int main()
         auto res = net.ForwardProp(data);
         std::cout << res.back() << "\nCost:\n"
                   << net.Cost(res.back(), anw) << '\n';
-        auto corrections = net.BackwordProp(res, res.back(), anw, 0.000001);
+        auto corrections = net.BackwordProp(res, res.back(), anw, 0.00001);
         net.Learn(corrections);
 
         //hold enter to see training progress
