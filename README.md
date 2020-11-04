@@ -32,9 +32,9 @@ int main()
 * saving/loading functionality
 #### Other:
 * dropout variants for input&hidden layers
-* helper functions for weight/bias init
 
 # :construction:In Progress
+* He/Xavier init
 * :sparkles: convolutions and pooling
 
 # Future Features
