@@ -39,6 +39,7 @@ int main()
 
 # Future Features
 * batch normalization
+* Softmax
 * :sparkles: optimizer argument for network (like Adam for example)
 * :racehorse: GPU or SIMD integration (to be tested)
 
