@@ -26,6 +26,7 @@ int main()
 #### Implementation:
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
+* :sparkles: ForwardProp thread safe
 #### Essential:
 * FC layers
 * Activation functions: Relu, ReluLeaky, Sigmoid, Tanh, Swish
