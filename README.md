@@ -2,6 +2,18 @@
 # Ruminate
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
+##Network Initilization Example:
+```cpp
+pcg32 rng(time(NULL) << 8, time(NULL) >> 8);
+    NeuralNetwork<ANN> net{
+        new Input(2),
+        new Weight(2, 1, 0, 1, rng),
+        new HiddenDrop(3, Relu, ReluPrime, 0, 1, 0.33, rng),
+        new Weight(3, 1, 0, 1, rng),
+        new Output(1, Relu, ReluPrime, 0, 1, rng),
+    };
+ ```
+
 # Features
 Implementation:
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
