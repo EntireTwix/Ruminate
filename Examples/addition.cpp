@@ -10,9 +10,7 @@ int main()
     pcg32 rng(time(NULL) << 8, time(NULL) >> 8);
     NeuralNetwork<ANN> net{
         new Input(2),                                        //2 node input
-        new Weight(2, 3, 0, 1, rng),                         //2x3 weights
-        new HiddenDrop(3, Relu, ReluPrime, 0, 1, 0.33, rng), //3 node hidden layer with dropout of 33%
-        new Weight(3, 1, 0, 1, rng),                         //3x1 weights
+        new Weight(2, 1, 0, 1, rng),                         //2x1 weights
         new Output(1, Relu, ReluPrime, 0, 1, rng),           //1 output node
     };
 
