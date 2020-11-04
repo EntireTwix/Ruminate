@@ -14,9 +14,9 @@ int main()
 {
     NeuralNetwork<ANN> net{
         new Input(2),                                             //2 node input
-        new Weight(2, 3, new HeWeight(2)),                        //2x3 weights
+        new Weight(2, 3, new RngInit()),                          //2x3 weights
         new HiddenDrop(3, ReluLeaky, ReluLeakyPrime, 0, 1, 0.33), //3 node hidden layer with dropout of 33%
-        new Weight(3, 1, new HeWeight(3)),                        //3x1 weights
+        new Weight(3, 1,new RngInit()),                           //3x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime),                 //1 output node
     };
  }
