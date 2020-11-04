@@ -92,7 +92,11 @@ namespace rum
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
             //std::cout << "O\n";
-            return cost = forwardRes[index].Transform(ActivationPrime) * cost; //to be optimized
+            for (uint32_t i = 0; i < cost.Area(); ++i)
+            {
+                cost.FastAt(i) *= ActivationPrime(forwardRes[index].FastAt(i));
+            }
+            return cost; //to be optimized
         }
     };
 
