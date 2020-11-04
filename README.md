@@ -28,7 +28,7 @@ int main()
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
 #### Essential:
 * FC layers
-* Activation functions: Relu,Sigmoid,Tanh,Swish
+* Activation functions: Relu, ReluLeaky, Sigmoid, Tanh, Swish
 * saving/loading functionality
 #### Other:
 * dropout variants for input&hidden layers
