@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 
-#define A 0.0001
+constexpr auto A = 0.0001;
 
 //relu
 
@@ -12,6 +12,32 @@ inline float Relu(float x)
 inline float ReluPrime(float x)
 {
     return x > 0;
+}
+
+//leaky relu
+
+inline float ReluLeaky(float x)
+{
+    if (x < 0)
+    {
+        return x * A;
+    }
+    else
+    {
+        return x;
+    }
+}
+
+inline float ReluLeakyPrime(float x)
+{
+    if (x < 0)
+    {
+        return A;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 //tanh
