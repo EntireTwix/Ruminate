@@ -1,4 +1,4 @@
-![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png =250x94)
+![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png){:height="50%" width="50%"}
 # Ruminate
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
