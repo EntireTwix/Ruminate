@@ -3,7 +3,7 @@
 #include <ctime>
 #include "../layers.hpp"
 #include "../../../OptimizedHeaders-main/mat.hpp"
-#include "../../../pcg32-master/pcg32.h"
+#include "../HelperFiles/rng_helpers.hpp"
 
 namespace rum
 {
@@ -33,12 +33,9 @@ namespace rum
         MLMat weights;
 
     public:
-        Weight(uint16_t prev, uint16_t next, float w_min, float w_max, pcg32 &rng, auto &&... saved_params) : weights(prev, next, saved_params...)
+        Weight(uint16_t prev, uint16_t next, RngInit *rng, auto &&... saved_params) : weights(prev, next, saved_params...)
         {
-            for (uint16_t i = 0; i < weights.Area(); ++i)
-            {
-                weights.FastAt(i) = (rng.nextFloat() * w_max) + w_min;
-            }
+            rng->Generator(weights);
         }
 
         MLMat &internal() override
@@ -63,17 +60,7 @@ namespace rum
         MLMat biases;
 
     public:
-        Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float b_min, float b_max, pcg32 &rng, auto &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...)
-        {
-            //only random init if saved params is empty
-            if (!sizeof...(saved_params))
-            {
-                for (uint16_t i = 0; i < biases.Area(); ++i)
-                {
-                    biases.FastAt(i) = (rng.nextFloat() * b_max) + b_min;
-                }
-            }
-        }
+        Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), auto &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
 
         MLMat &internal() override
         {
@@ -102,7 +89,7 @@ namespace rum
     class Output : public Hidden
     {
     public:
-        Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float b_min, float b_max, pcg32 &rng) : Hidden(hidden_nodes, a, ap, b_min, b_max, rng) {}
+        Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
             //std::cout << "O\n";
@@ -113,18 +100,17 @@ namespace rum
     class IDrop //interface for dropout layers
     {
     protected:
-        pcg32 generator;
         MLMat t_vals;
         float threshold;
 
     public:
-        IDrop(uint16_t hidden_nodes, pcg32 &rng, float thres) : t_vals(hidden_nodes, 1), generator(rng), threshold(thres) {}
+        IDrop(uint16_t hidden_nodes, float thres) : t_vals(hidden_nodes, 1), threshold(thres) {}
     };
 
     class InputDrop : public Input, public IDrop
     {
     public:
-        InputDrop(uint8_t input_sz, float thres, pcg32 &rng) : Input(input_sz), IDrop(input_sz, rng, thres) {}
+        InputDrop(uint8_t input_sz, float thres) : Input(input_sz), IDrop(input_sz, thres) {}
         virtual MLMat &internal()
         {
             return inp;
@@ -134,7 +120,7 @@ namespace rum
             //std::cout << "Id\n";
             for (uint32_t i = 0; i < input.Area(); ++i)
             {
-                inp.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = generator.nextFloat() > threshold);
+                inp.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = gen.nextFloat() > threshold);
             }
             return inp;
         }
@@ -143,7 +129,7 @@ namespace rum
     class HiddenDrop : public Hidden, public IDrop
     {
     public:
-        HiddenDrop(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float b_min, float b_max, float thres, pcg32 &rng, auto &&... saved_params) : Hidden(hidden_nodes, a, ap, b_min, b_max, rng, saved_params...), IDrop(hidden_nodes, rng, thres) {}
+        HiddenDrop(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float thres, auto &&... saved_params) : Hidden(hidden_nodes, a, ap, saved_params...), IDrop(hidden_nodes, thres) {}
         virtual MLMat ForwardProp(const MLMat &input) override
         {
             //std::cout << "Hd\n";
@@ -152,7 +138,7 @@ namespace rum
             {
                 for (uint16_t j = 0; j < input.SizeX(); ++j)
                 {
-                    res.At(j, i) = this->Activation(input.At(j, i) + biases.FastAt(i)) * (t_vals.FastAt(i) = generator.nextFloat() > threshold);
+                    res.At(j, i) = this->Activation(input.At(j, i) + biases.FastAt(i)) * (t_vals.FastAt(i) = gen.nextFloat() > threshold);
                 }
             }
             return res;
