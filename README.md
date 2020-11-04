@@ -2,7 +2,7 @@
 # Ruminate
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
-##Network Initilization Example:
+## Network Initilization Example:
 ```cpp
 pcg32 rng(time(NULL) << 8, time(NULL) >> 8);
     NeuralNetwork<ANN> net{
@@ -15,16 +15,14 @@ pcg32 rng(time(NULL) << 8, time(NULL) >> 8);
  ```
 
 # Features
-Implementation:
+## Implementation:
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
-
-Essential:
+## Essential:
 * FC layers
 * Activation functions: Relu,Sigmoid,Tanh,Swish
 * saving/loading functionality
-
-Other:
+## Other:
 * dropout variants for input&hidden layers
 
 # :construction:In Progress
