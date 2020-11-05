@@ -35,6 +35,7 @@ namespace rum
         Weight(uint16_t prev, uint16_t next, RngInit *rng, auto &&... saved_params) : weights(prev, next, saved_params...)
         {
             rng->Generator(weights);
+            delete rng;
         }
 
         MLMat &internal() override
@@ -96,7 +97,7 @@ namespace rum
             {
                 cost.FastAt(i) *= ActivationPrime(forwardRes[index].FastAt(i));
             }
-            return cost; //to be optimized
+            return cost;
         }
     };
 
