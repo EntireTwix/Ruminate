@@ -1,5 +1,5 @@
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
-# Ruminate
+# Ruminate v1.0.3
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
 ### Network Initilization Example:
