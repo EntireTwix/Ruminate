@@ -36,6 +36,7 @@ int main()
 * dropout variants for input&hidden layers
 
 # :construction:In Progress
+* may refactor dropout as layer instead of variant of an existing layer
 * He/Xavier init
 * :sparkles: convolutions and pooling
 
