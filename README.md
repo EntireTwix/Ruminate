@@ -12,12 +12,13 @@ using namespace rum;
 
 int main()
 {
-    NeuralNetwork<ANN> net{
-        new Input(2),                                             //2 node input
-        new Weight(2, 3, new RngInit()),                          //2x3 weights
-        new HiddenDrop(3, ReluLeaky, ReluLeakyPrime, 0, 1, 0.33), //3 node hidden layer with dropout of 33%
-        new Weight(3, 1,new RngInit()),                           //3x1 weights
-        new Output(1, ReluLeaky, ReluLeakyPrime),                 //1 output node
+     NeuralNetwork<ANN> net{
+        new Input(2),                             //2 node input
+        new Weight(2, 3, new RngInit()),          //2x1 weights
+        new DropOut(3, 0.25),                     //dropout of 25% of the input
+        new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 node hidden layer
+        new Weight(3, 1, new RngInit()),          //3x1 weights
+        new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
  }
  ```
@@ -33,10 +34,9 @@ int main()
 * saving/loading functionality
 * variable batch size
 #### Other:
-* dropout variants for input&hidden layers
+* dropout layer
 
 # :construction:In Progress
-* may refactor dropout as layer instead of variant of an existing layer
 * He/Xavier init
 * :sparkles: convolutions and pooling
 
