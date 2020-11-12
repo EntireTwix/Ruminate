@@ -19,6 +19,7 @@ namespace rum
             layers = new T *[sz] { args... };
         }
 
+        //thread safe
         std::vector<RT> ForwardProp(const RT &input) const
         {
             std::vector<RT> res(sz);
@@ -31,6 +32,8 @@ namespace rum
             }
             return res;
         }
+
+        //thread safe
         std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, const RT &guess, const RT &anwser, float lr)
         {
             std::vector<RT> res(sz);
@@ -46,11 +49,13 @@ namespace rum
             }
             return res;
         }
+
+        //not thread safe
         void Learn(const std::vector<RT> &backRes)
         {
-            for (uint8_t i = 1; i < sz; ++i)
+            for (uint8_t i = 0; i < sz; ++i)
             {
-                layers[i]->internal() -= backRes[i];
+                layers[i]->Learn(backRes[i]);
             }
         }
         std::string Save()
