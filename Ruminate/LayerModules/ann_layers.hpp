@@ -121,7 +121,8 @@ namespace rum
         }
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
-            return cost *= t_vals;
+            cost *= t_vals;
+            return MLMat(1, 1); //as MLMat doesnt utilize/isnt utilized by other layers
         }
         virtual MLMat &internal() override { return t_vals; }
         virtual void Learn(const MLMat &correction) override {} //doesnt correct
