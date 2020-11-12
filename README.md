@@ -45,10 +45,10 @@ for (int i = 0; i < 10; ++i)
         res = net.ForwardProp(data);
         corrections[i] = net.BackwordProp(res, res.back(), anw, 0.00001);
     });
-    while(pool.JobsLeft()) {} //complete jobs
-    //...
-    //Learn() after averaging corrections into one vec
 }
+while(pool.JobsLeft()) {} //complete jobs
+//...
+//Learn() after averaging corrections into one vec
 ```
 and this is assuming your batch size is 1, as this library supports variable batch size you could multi thread each batch
 
