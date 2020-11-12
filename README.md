@@ -45,6 +45,7 @@ for (int i = 0; i < 10; ++i)
         res = net.ForwardProp(data);
         corrections[i] = net.BackwordProp(res, res.back(), anw, 0.00001);
     });
+    while(pool.JobsLeft()) {} //complete jobs
     //...
     //Learn() after averaging corrections into one vec
 }
