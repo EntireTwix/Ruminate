@@ -2,25 +2,18 @@
 # Ruminate v1.0.3
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
+# Examples
 ### Network Initilization Example:
 ```cpp
-#include "../Ruminate-main/Ruminate/net.hpp"
-#include "../Ruminate-main/Ruminate/LayerModules/ann_layers.hpp"
-#include "../Ruminate-main/Ruminate/HelperFiles/a_funcs.hpp"
+NeuralNetwork<ANN> net{
+     new Input(2),                             //2 node input
+     new Weight(2, 3, new RngInit()),          //2x1 weights
+     new DropOut(3, 0.25),                     //dropout of 25% of the input
+     new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 node hidden layer
+     new Weight(3, 1, new RngInit()),          //3x1 weights
+     new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
+ };
 
-using namespace rum;
-
-int main()
-{
-     NeuralNetwork<ANN> net{
-        new Input(2),                             //2 node input
-        new Weight(2, 3, new RngInit()),          //2x1 weights
-        new DropOut(3, 0.25),                     //dropout of 25% of the input
-        new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 node hidden layer
-        new Weight(3, 1, new RngInit()),          //3x1 weights
-        new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
-    };
- }
  ```
 ### Learning Loop Example:
 ```cpp
@@ -51,6 +44,14 @@ while(pool.JobsLeft()) {} //complete jobs
 //Learn() after averaging corrections into one vec
 ```
 and this is assuming your batch size is 1, as this library supports variable batch size you could multi thread each batch
+
+# Installation
+to install, simply download this repo and the dependency files repos/files (found at the bottom) and then add this flag
+```
+-IC:/Ruminate-main/
+```
+where the path is wherever it resides.
+Make sure the dependency files are properly linked with Ruminate 
 
 # Features
 #### Implementation:
