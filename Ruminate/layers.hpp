@@ -13,8 +13,9 @@ namespace rum
     public:
         using type = M;
 
-        virtual M ForwardProp(const M &input) { return input; } //maybe could be made reference
+        virtual M ForwardProp(const M &input) { return input; }
         virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const { return cost; }
+        virtual void Learn(const M &correction) { this->internal() -= correction; } //most layers correct by subtracting correction from current internal
         virtual M &internal() = 0;
     };
 
