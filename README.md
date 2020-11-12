@@ -37,7 +37,7 @@ and this could be easily multi-threaded with something like tpool.h in my Optimi
 ```cpp
 for (int i = 0; i < 10; ++i)
 {
-    pool.AddTask([i]() {
+    pool.AddTask([i, &corrections]() {
         data.At(0, 0) = gen.nextUInt(100);
         data.At(0, 1) = gen.nextUInt(100);
         anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
