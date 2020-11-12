@@ -24,6 +24,7 @@ namespace rum
             //std::cout << "I\n";
             return inp = input;
         }
+        virtual void Learn(const MLMat &correction) override {} //doesnt correct
     };
 
     class Weight : public ANN
@@ -101,56 +102,28 @@ namespace rum
         }
     };
 
-    class IDrop //interface for dropout layers
+    class DropOut : public ANN
     {
-    protected:
+    private:
         MLMat t_vals;
-        float threshold;
+        float thres;
 
     public:
-        IDrop(uint16_t hidden_nodes, float thres) : t_vals(hidden_nodes, 1), threshold(thres) {}
-    };
-
-    class InputDrop : public Input, public IDrop
-    {
-    public:
-        InputDrop(uint8_t input_sz, float thres) : Input(input_sz), IDrop(input_sz, thres) {}
-        virtual MLMat &internal()
-        {
-            return inp;
-        }
+        DropOut(uint16_t sz, float thres) : t_vals(sz, 1), thres(thres) {}
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            //std::cout << "Id\n";
+            MLMat res(input.SizeX(), input.SizeY());
             for (uint32_t i = 0; i < input.Area(); ++i)
             {
-                inp.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = gen.nextFloat() > threshold);
-            }
-            return inp;
-        }
-    };
-
-    class HiddenDrop : public Hidden, public IDrop
-    {
-    public:
-        HiddenDrop(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), float thres, auto &&... saved_params) : Hidden(hidden_nodes, a, ap, saved_params...), IDrop(hidden_nodes, thres) {}
-        virtual MLMat ForwardProp(const MLMat &input) override
-        {
-            //std::cout << "Hd\n";
-            MLMat res(input.SizeX(), input.SizeY());
-            for (uint16_t i = 0; i < input.SizeY(); ++i)
-            {
-                for (uint16_t j = 0; j < input.SizeX(); ++j)
-                {
-                    res.At(j, i) = this->Activation(input.At(j, i) + biases.FastAt(i)) * (t_vals.FastAt(i) = gen.nextFloat() > threshold);
-                }
+                res.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = gen.nextFloat() > thres);
             }
             return res;
         }
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
-            //std::cout << "Hd\n";
-            return cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1].Transform(ActivationPrime) * t_vals; //to be optimized
+            return cost *= t_vals;
         }
+        virtual MLMat &internal() override { return t_vals; }
+        virtual void Learn(const MLMat &correction) override {} //doesnt correct
     };
 } // namespace rum
