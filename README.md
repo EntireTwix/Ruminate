@@ -77,4 +77,5 @@ and this is assuming your batch size is 1, as this library supports variable bat
 
 # Dependencies
 * mat.h    from EntireTwix/OptimizedHeaders
+* generics.h from EntireTwix/MiscHeaderFiles
 * pcg32.h  from wjakob/pcg32
