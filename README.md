@@ -44,16 +44,7 @@ while(pool.JobsLeft()) {} //complete jobs
 //Learn() after averaging corrections into one vec
 ```
 and this is assuming your batch size is 1, as this library supports variable batch size you could multi thread each batch.
-
-### check out Examples folder for more examples
-
-# Installation
-to install, simply download this repo and the dependency files repos/files (found at the bottom) and then add this flag
-```
--IC:/Ruminate-main/
-```
-where the path is wherever it resides.
-Make sure the dependency files are properly linked with Ruminate 
+#### check out Examples folder for more examples
 
 # Features
 #### Implementation:
@@ -69,14 +60,14 @@ Make sure the dependency files are properly linked with Ruminate
 * dropout layer
 
 # :construction:In Progress
+* :racehorse: Cuda integration
 * He/Xavier init
-* :sparkles: convolutions and pooling
+* :sparkles: CNN functionality
 
 # Future Features
 * batch normalization
 * Softmax
 * :sparkles: optimizer argument for network (like Adam for example)
-* :racehorse: GPU or SIMD integration (to be tested)
 
 # Dependencies
 * mat.h    from EntireTwix/OptimizedHeaders
