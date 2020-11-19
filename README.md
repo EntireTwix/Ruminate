@@ -64,7 +64,7 @@ and this is assuming your batch size is 1, as this library supports variable bat
 ### Usage:
 to use simply compile with nvcc and will be compiled for cuda
 ### Performance:
-Speedup can range widely depending on gpu and cpu but generally gpu does better at high matrix area size
+Speedup can range widely depending on gpu and cpu but generally gpu does better for large matrices and cpu for small
 ### Compilation:
 here is a compilation example
 ```nvcc -ccbin 'path/cl.exe' --std c++17 $fileName -o $fileNameWithoutExt -IC:/Ruminate-main/ -O3 && $dir$fileNameWithoutExt"```
