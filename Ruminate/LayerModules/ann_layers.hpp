@@ -33,7 +33,8 @@ namespace rum
         MLMat weights;
 
     public:
-        Weight(uint16_t prev, uint16_t next, RngInit *rng, auto &&... saved_params) : weights(prev, next, saved_params...)
+        template <typename... Params>
+        Weight(uint16_t prev, uint16_t next, RngInit *rng, Params &&... saved_params) : weights(prev, next, saved_params...)
         {
             rng->Generator(weights);
             delete rng;
@@ -61,7 +62,8 @@ namespace rum
         MLMat biases;
 
     public:
-        Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), auto &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
+        template <typename... Params>
+        Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), Params &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
 
         MLMat &internal() override
         {
@@ -78,6 +80,7 @@ namespace rum
                     res.At(j, i) = this->Activation(input.At(j, i) + biases.FastAt(i));
                 }
             }
+
             return res;
         }
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
