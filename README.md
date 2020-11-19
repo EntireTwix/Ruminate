@@ -36,7 +36,7 @@ for (int i = 0; i < 10; ++i)
         anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
 
         res = net.ForwardProp(data);
-        corrections[i] = net.BackwordProp(res, res.back(), anw, 0.00001);
+        corrections[i] = net.BackwordProp(res, res.back(), anw, 0.002);
     });
 }
 while(pool.Jobs()) {} //complete jobs
