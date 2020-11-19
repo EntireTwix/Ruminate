@@ -1,6 +1,6 @@
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
 # Ruminate v1.1.3
-an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
+an ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
 # Usage
 ### Network Initilization Example:
@@ -26,7 +26,7 @@ auto res = net.ForwardProp(data); //forward propogating
 auto corrections = net.BackwordProp(res, res.back(), anw, 0.002); //generating corrections
 net.Learn(corrections); //applying corrections
 ```
-and this could be easily multi-threaded with something like tpool.h in my OptimizedHeaders repo or any other thread pool
+and this could be easily **multi-threaded** with something like **tpool.h** in my OptimizedHeaders repo or any other thread pool
 ```cpp
 for (int i = 0; i < 10; ++i)
 {
