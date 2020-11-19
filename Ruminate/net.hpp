@@ -4,7 +4,11 @@
 
 namespace rum
 {
+#ifdef __NVCC__
+    template <typename T>
+#else
     template <LayerType T>
+#endif
     class NeuralNetwork
     {
     private:
@@ -14,7 +18,8 @@ namespace rum
 
     public:
         NeuralNetwork() = delete;
-        NeuralNetwork(auto &&... args) : sz(sizeof...(args))
+        template <typename... Params>
+        NeuralNetwork(Params &&... args) : sz(sizeof...(args))
         {
             layers = new T *[sz] { args... };
         }
