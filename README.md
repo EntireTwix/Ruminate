@@ -23,7 +23,7 @@ data.At(0, 1) = gen.nextUInt(100);
 anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
 
 auto res = net.ForwardProp(data); //forward propogating 
-auto corrections = net.BackwordProp(res, res.back(), anw, 0.00001); //generating corrections
+auto corrections = net.BackwordProp(res, res.back(), anw, 0.002); //generating corrections
 net.Learn(corrections); //applying corrections
 ```
 and this could be easily multi-threaded with something like tpool.h in my OptimizedHeaders repo or any other thread pool
@@ -75,12 +75,12 @@ to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
 * compiler args found here https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
 
 # :construction:In Progress
+* batch normalization
+* Softmax
 * He/Xavier init
 * :sparkles: CNN functionality
 
 # Future Features
-* batch normalization
-* Softmax
 * :sparkles: optimizer argument for network (like Adam for example)
 
 # Dependencies
