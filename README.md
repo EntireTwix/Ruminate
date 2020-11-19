@@ -70,6 +70,7 @@ and this is assuming your batch size is 1, as this library supports variable bat
 * :sparkles: optimizer argument for network (like Adam for example)
 
 # Dependencies
-* mat.h    from EntireTwix/OptimizedHeaders
+* mat.hpp    from EntireTwix/OptimizedHeaders
 * generics.h from EntireTwix/MiscHeaderFiles
 * pcg32.h  from wjakob/pcg32
+* \*mat.hpp & cuda_mat.hpp from EntireTwix/OptimzedHeaders/CUDA
