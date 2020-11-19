@@ -2,7 +2,7 @@
 # Ruminate v1.1.3
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
-# Examples
+# Usage
 ### Network Initilization Example:
 ```cpp
 NeuralNetwork<ANN> net{
@@ -59,6 +59,20 @@ and this is assuming your batch size is 1, as this library supports variable bat
 * variable batch size
 #### Other:
 * dropout layer
+
+# CUDA
+### Usage:
+to use simply compile with nvcc and will be compiled for cuda
+### Performance:
+Speedup can range widely depending on gpu and cpu but generally gpu does better at high matrix area size
+### Compilation:
+here is a compilation example
+```nvcc -ccbin 'path/cl.exe' --std c++17 $fileName -o $fileNameWithoutExt -IC:/Ruminate-main/ -O3 && $dir$fileNameWithoutExt"```
+### Optimization:
+* you can use CUDA Occupancy Calculator found here: https://docs.nvidia.com/cuda/cuda-occupancy-calculator/index.html
+to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
+* you can fite tune (till I automate the benchmarking) the threshold macro in the cuda variant of mat.h to fit where the gpu overtakes the cpu in performance (as at low element count cpu is faster and will be defaulted to)
+* compiler args found here https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
 
 # :construction:In Progress
 * He/Xavier init
