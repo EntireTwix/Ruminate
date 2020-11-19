@@ -71,7 +71,7 @@ here is a compilation example
 ### Optimization:
 * you can use CUDA Occupancy Calculator found here: https://docs.nvidia.com/cuda/cuda-occupancy-calculator/index.html
 to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
-* you can fite tune (till I automate the benchmarking) the ```cpu_threshold``` macro in the cuda variant of mat.h to when the gpu overtakes the cpu in performance (as at low element count cpu is faster and will be defaulted to)
+* use the program in OptimzationHeaders/CUDA called main.cu to fine tune the macro ```cpu_threshold``` in that same folder to better match the point at which your systems gpu out performs your cpu
 * compiler args found here https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
 
 # :construction:In Progress
