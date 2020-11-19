@@ -14,7 +14,7 @@ namespace rum
         MLMat inp;
 
     public:
-        Input(uint8_t input_sz) : inp(1, input_sz) {}
+        Input(uint16_t input_sz) : inp(1, input_sz) {}
         virtual MLMat &internal()
         {
             return inp;
