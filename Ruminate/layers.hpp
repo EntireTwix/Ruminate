@@ -1,13 +1,20 @@
 #pragma once
-#include <concepts>
-#include <type_traits>
 #include <vector>
+
+#ifdef __NVCC__
+#include "../../OptimizedHeaders-main/CUDA/mat.hpp"
+#else
 #include "../../OptimizedHeaders-main/mat.hpp"
+#endif
 
 namespace rum
 {
-    //an abstract type that is used polymorphically in net.h
+//an abstract type that is used polymorphically in net.h
+#ifdef __NVCC__
+    template <typename M>
+#else
     template <Matrix M>
+#endif
     class Layer
     {
     public:
@@ -32,6 +39,8 @@ namespace rum
         IActivationFuncs(T (*a)(T), T (*ap)(T)) : Activation(a), ActivationPrime(ap) {}
     };
 
+#ifndef __NVCC__
     template <typename T>
     concept LayerType = std::is_base_of<Layer<typename T::type>, T>::value;
+#endif
 }; // namespace rum
