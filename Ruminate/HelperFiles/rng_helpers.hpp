@@ -1,6 +1,11 @@
 #pragma once
 #include "../../../pcg32-master/pcg32.h"
-#include "../../../OptimizedHeaders-main/mat.hpp"
+
+#ifdef __NVCC__
+#include "../../OptimizedHeaders-main/CUDA/mat.hpp"
+#else
+#include "../../OptimizedHeaders-main/mat.hpp"
+#endif
 
 namespace rum
 {
