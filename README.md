@@ -1,5 +1,5 @@
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
-# Ruminate v1.0.3
+# Ruminate v1.1.3
 an ML library that aims to be lightweight, fast, and generic. Written in and for Cpp20
 
 # Examples
@@ -51,6 +51,7 @@ and this is assuming your batch size is 1, as this library supports variable bat
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
 * :sparkles: Forward&Back propogation are thread safe
+* :racehorse: Cuda integration
 #### Essential:
 * FC layers
 * Activation functions: Relu, ReluLeaky, Sigmoid, Tanh, Swish
@@ -60,7 +61,6 @@ and this is assuming your batch size is 1, as this library supports variable bat
 * dropout layer
 
 # :construction:In Progress
-* :racehorse: Cuda integration
 * He/Xavier init
 * :sparkles: CNN functionality
 
