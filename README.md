@@ -6,7 +6,7 @@ an ML library that aims to be lightweight, fast, and generic. Written in and for
 ### Network Initilization Example:
 ```cpp
 NeuralNetwork<ANN> net{
-     new Input(2),                             //2 node input
+     new Input<MLMat>(2),                      //2 node input
      new Weight(2, 3, new RngInit()),          //2x1 weights
      new DropOut(3, 0.25),                     //dropout of 25% of the input
      new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 node hidden layer
