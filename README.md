@@ -1,5 +1,5 @@
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
-# Ruminate v1.1.3
+# Ruminate v1.1.4
 an ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
 # Usage
@@ -23,7 +23,7 @@ data.At(0, 1) = gen.nextUInt(100);
 anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
 
 auto res = net.ForwardProp(data); //forward propogating 
-auto corrections = net.BackwordProp(res, res.back(), anw, 0.002); //generating corrections
+auto corrections = net.BackwordProp(res, net.GetCostPrime(res.back(), anw), 0.002); //generating corrections
 net.Learn(corrections); //applying corrections
 ```
 and this could be easily **multi-threaded** with something like **tpool.h** in my OptimizedHeaders repo or any other thread pool
@@ -36,7 +36,7 @@ for (int i = 0; i < 10; ++i)
         anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
 
         res = net.ForwardProp(data);
-        corrections[i] = net.BackwordProp(res, res.back(), anw, 0.002);
+        corrections[i] = net.BackwordProp(res, net.GetCostPrime(res.back(), anw), 0.002);
     });
 }
 while(pool.Jobs()) {} //complete jobs
@@ -58,6 +58,7 @@ and this is assuming your batch size is 1, as this library supports variable bat
 * saving/loading functionality
 * variable batch size
 #### Other:
+* batch normalization layer
 * dropout layer
 
 # CUDA
@@ -76,7 +77,6 @@ to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
 * compiler args found here https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
 
 # :construction:In Progress
-* batch normalization
 * Softmax
 * He/Xavier init
 * :sparkles: CNN functionality
