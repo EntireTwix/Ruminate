@@ -28,6 +28,7 @@ net.Learn(corrections); //applying corrections
 ```
 and this could be easily **multi-threaded** with something like **tpool.h** in my OptimizedHeaders repo or any other thread pool
 ```cpp
+//Start() thread pool
 for (int i = 0; i < 10; ++i)
 {
     pool.AddTask([i, &corrections]() {
@@ -71,10 +72,10 @@ Speedup can range widely depending on gpu and cpu but generally gpu does better 
 here is a compilation example
 ```nvcc -ccbin 'path/cl.exe' --std c++17 $fileName -o $fileNameWithoutExt -IC:/Ruminate-main/ -O3 && $dir$fileNameWithoutExt"```
 ### Optimization:
-* you can use CUDA Occupancy Calculator found here: https://docs.nvidia.com/cuda/cuda-occupancy-calculator/index.html
-to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
 * use the program in OptimzationHeaders/CUDA called main.cu to fine tune the macro ```cpu_threshold``` in that same folder to better match the point at which your systems gpu out performs your cpu
 * compiler args found here https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
+* you can use CUDA Occupancy Calculator found here: https://docs.nvidia.com/cuda/cuda-occupancy-calculator/index.html
+to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
 
 # :construction:In Progress
 * Softmax
