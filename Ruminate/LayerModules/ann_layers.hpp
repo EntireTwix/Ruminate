@@ -8,7 +8,11 @@ namespace rum
 {
     using ANN = Layer<MLMat>;
 
+#ifdef __NVCC__
+    template <typename M>
+#else
     template <Matrix M>
+#endif
     class Input : public Layer<M>
     {
     protected:
@@ -106,7 +110,11 @@ namespace rum
         }
     };
 
+#ifdef __NVCC__
+    template <typename M>
+#else
     template <Matrix M>
+#endif
     class DropOut : public Layer<M>
     {
     private:
@@ -133,7 +141,11 @@ namespace rum
         virtual void Learn(const M &correction) override {} //doesnt correct
     };
 
+#ifdef __NVCC__
+    template <typename M>
+#else
     template <Matrix M>
+#endif
     class Batch : public Input<M>
     {
     private:
