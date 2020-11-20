@@ -39,10 +39,10 @@ namespace rum
         }
 
         //thread safe
-        std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, const RT &guess, const RT &anwser, float lr)
+        std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, RT &&cost_prime, float lr)
         {
             std::vector<RT> res(sz);
-            RT cost = CostPrime(guess, anwser) * lr; //not optimal
+            RT cost = cost_prime *= lr; //not optimal
 
             //std::cout << "\nBackProp:\n" << cost << '\n';
             for (uint8_t i = sz - 1; i > 0; --i)
@@ -66,7 +66,7 @@ namespace rum
         std::string Save()
         {
             std::string res;
-            for (uint8_t i = 1; i < sz; ++i)
+            for (uint8_t i = 0; i < sz; ++i)
             {
                 res += layers[i]->internal().Save() + '\n';
             }
