@@ -11,10 +11,10 @@ int main()
 
     NeuralNetwork<ANN> net{
         new Input(2),
-        new Weight(2, 3, new RngInit()), //2x1 weights
-        new DropOut(3, 0.25),
-        new Hidden(3, ReluLeaky, ReluLeakyPrime),
-        new Weight(3, 1, new RngInit()),
+        new Weight(2, 3, new RngInit()),          //2x1 weights
+        new DropOut(3, 0.25),                     //25% dropout
+        new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 hidden nodes
+        new Weight(3, 1, new RngInit()),          //3x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
 
