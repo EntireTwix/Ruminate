@@ -83,6 +83,8 @@ to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
 
 # Future Features
 * :sparkles: optimizer argument for network (like Adam for example)
+* :sparkles: RNN functionality
+* built in ResNet50 model
 
 # Dependencies
 * mat.hpp    from EntireTwix/OptimizedHeaders
