@@ -37,6 +37,7 @@ int main()
         net.Learn(corrections);
 
         //hold enter to see training progress
+        std::cin.get()
     }
     return 0;
 }
