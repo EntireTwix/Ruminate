@@ -10,10 +10,10 @@ int main()
 {
 
     NeuralNetwork<ANN> net{
-        new Batch(10, 2),
-        new Weight(2, 3, new RngInit()), //2x1 weights
-        new Hidden(3, ReluLeaky, ReluLeakyPrime),
-        new Weight(3, 1, new RngInit()),
+        new Batch(10, 2),                         //batch input of 10
+        new Weight(2, 3, new RngInit()),          //2x1 weights
+        new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 hidden nodes
+        new Weight(3, 1, new RngInit()),          //3x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
 
