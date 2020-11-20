@@ -50,10 +50,10 @@ and this is assuming your batch size is 1, as this library supports variable bat
 #### Implementation:
 * :sparkles: polymorphically based NeuralNetwork with constrained template argument for future LayerTypes
 * :racehorse: fast initialization of weights and biases using pcg32 implementation from https://github.com/wjakob/pcg32
-* :sparkles: Forward&Back propogation are thread safe
+* :racehorse: Forward&Back propogation are thread safe
 * :racehorse: Cuda integration
 #### Essential:
-* FC layers
+* ANN functionality
 * Activation functions: Relu, ReluLeaky, Sigmoid, Tanh, Swish
 * saving/loading functionality
 * variable batch size
