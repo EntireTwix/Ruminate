@@ -10,7 +10,7 @@ int main()
 {
 
     NeuralNetwork<ANN> net{
-        new Input(2),                             //2 node input
+        new Input<MLMat>(2),                      //2 node input
         new Weight(2, 1, new RngInit()),          //2x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
@@ -33,11 +33,11 @@ int main()
         auto res = net.ForwardProp(data);
         std::cout << res.back() << "\nCost:\n"
                   << net.Cost(res.back(), anw) << '\n';
-        auto corrections = net.BackwordProp(res, res.back(), anw, 0.0001);
+        auto corrections = net.BackwordProp(res, net.CostPrime(res.back(), anw), 0.0001);
         net.Learn(corrections);
 
         //hold enter to see training progress
-        std::cin.get()
+        std::cin.get();
     }
     return 0;
 }
