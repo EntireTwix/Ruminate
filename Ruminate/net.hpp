@@ -66,7 +66,7 @@ namespace rum
         std::string Save()
         {
             std::string res;
-            for (uint8_t i = 0; i < sz; ++i)
+            for (uint8_t i = 1; i < sz; ++i)
             {
                 res += layers[i]->internal().Save() + '\n';
             }
