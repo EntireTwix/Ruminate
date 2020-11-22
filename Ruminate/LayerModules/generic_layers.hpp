@@ -27,6 +27,7 @@ namespace rum
             {
                 inp.FastAt(i) = input.FastAt(i);
             }
+            return inp;
         }
         virtual void Learn(const M &correction) override {} //doesnt correct
     };
