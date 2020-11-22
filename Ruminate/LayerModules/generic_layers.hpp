@@ -22,7 +22,11 @@ namespace rum
         virtual M ForwardProp(const M &input) override
         {
             //std::cout << "I\n";
-            return inp = input; //unfortunately a copy call
+            //copies it as long as input matches inp's area, not nessasirly dimensions
+            for (size_t i = 0; i < inp.Area(); ++i)
+            {
+                inp.FastAt(i) = input.FastAt(i);
+            }
         }
         virtual void Learn(const M &correction) override {} //doesnt correct
     };
@@ -72,13 +76,15 @@ namespace rum
         Batch(uint8_t batch_sz, uint16_t input_sz) : batch_sz(batch_sz), Input<M>(input_sz) {}
         virtual M ForwardProp(const M &input) override
         {
+            typename M::type sum;
             for (typename M::storage_type i = 0; i < input.SizeY(); ++i)
             {
+                sum = 0;
                 for (typename M::storage_type j = 0; j < input.SizeX(); ++j)
                 {
-                    this->inp.At(0, i) += input.At(j, i);
+                    sum += input.At(j, i);
                 }
-                this->inp.At(0, i) /= input.SizeX();
+                this->inp.At(0, i) = sum / input.SizeX();
             }
             return this->inp;
         }
