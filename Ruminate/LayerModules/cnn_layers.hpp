@@ -1,7 +1,7 @@
 #pragma once
 #include "../layers.hpp"
-#include "../../../OptimizedHeaders-main/mat.hpp"
-#include "../../../pcg32-master/pcg32.h"
+#include "../Dependencies/mat.hpp"
+#include "../Dependencies/pcg32.h"
 
 //convolution
 //pooling
