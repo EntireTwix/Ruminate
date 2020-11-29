@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../pcg32-master/pcg32.h"
+#include "../Dependencies/pcg32.h"
 
 #ifdef __NVCC__
 #include "../Dependencies/mat.hpp"
