@@ -2,9 +2,9 @@
 #include <vector>
 
 #ifdef __NVCC__
-#include "../../OptimizedHeaders-main/CUDA/mat.hpp"
+#include "../Dependencies/mat.hpp"
 #else
-#include "../../OptimizedHeaders-main/mat.hpp"
+#include "../Dependencies/mat.hpp"
 #endif
 
 namespace rum
