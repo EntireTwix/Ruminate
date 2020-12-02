@@ -2,7 +2,7 @@
 #include <random>
 #include <ctime>
 #include "layers.hpp"
-#include "rng_helpers.hpp"
+#include "../HelperFiles/rng_helpers.hpp"
 
 namespace rum
 {
