@@ -2,4 +2,4 @@
 
 #include "net.hpp"
 #include "layers.hpp"
-#include "generic_layers.hpp"
+#include "LayerModules/generic_layers.hpp"
