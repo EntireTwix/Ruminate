@@ -1,4 +1,5 @@
 #pragma once
+#include <ctime>
 #include "../dependencies/pcg32.h"
 
 #ifdef __NVCC__
