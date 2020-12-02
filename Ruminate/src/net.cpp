@@ -19,7 +19,7 @@ namespace rum
 #else
     template <LayerType T>
 #endif
-    inline std::vector<typename T::type> NeuralNetwork::ForwardProp(const typename T::type &input) const
+    inline std::vector<typename T::type> NeuralNetwork<T>::ForwardProp(const typename T::type &input) const
     {
         std::vector<typename T::type> res(sz);
         res[0] = layers[0]->ForwardProp(input);
@@ -113,7 +113,7 @@ namespace rum
 #else
     template <LayerType T>
 #endif
-    inline ~NeuralNetwork<T>::NeuralNetwork()
+    ~NeuralNetwork<T>::NeuralNetwork()
     {
         for (size_t i = 0; i < sz; ++i)
         {
@@ -122,5 +122,3 @@ namespace rum
         delete[] layers;
     }
 }; // namespace rum
-}
-; // namespace rum
