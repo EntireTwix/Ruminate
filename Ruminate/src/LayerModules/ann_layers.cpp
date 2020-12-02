@@ -1,4 +1,4 @@
-#include "ann_layers.hpp"
+#include "LayerModules/ann_layers.hpp"
 
 namespace rum
 {
@@ -11,16 +11,16 @@ namespace rum
         delete rng;
     }
 
-    inline MLMat &Weight::internal() override
+    inline MLMat &Weight::internal()
     {
         return weights;
     }
-    inline virtual MLMat Weight::ForwardProp(const MLMat &input) override
+    inline MLMat Weight::ForwardProp(const MLMat &input) 
     {
         //std::cout << "W\n";
         return weights.Dot(input);
     }
-    inline virtual MLMat Weight::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
+    inline MLMat Weight::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
     {
         //std::cout << "W\n";
         return cost.Dot(forwardRes[index - 1]);
@@ -29,11 +29,11 @@ namespace rum
     template <typename... Params>
     inline Hidden::Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), Params &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
 
-    inline MLMat &Hidden::internal() override
+    inline MLMat &Hidden::internal()
     {
         return biases;
     }
-    inline virtual MLMat Hidden::ForwardProp(const MLMat &input) override
+    inline MLMat Hidden::ForwardProp(const MLMat &input)
     {
         //std::cout << "H\n";
         MLMat res(input.SizeX(), input.SizeY());
@@ -47,14 +47,14 @@ namespace rum
 
         return res;
     }
-    inline virtual MLMat Hidden::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
+    inline MLMat Hidden::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
     {
         //std::cout << "H\n";
         return cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1].Transform(ActivationPrime); //TODO: to be optimized
     }
 
-    inline Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
-    inline virtual MLMat Hidden::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
+    inline Output::Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
+    inline MLMat Output::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
     {
         //std::cout << "O\n";
         for (uint32_t i = 0; i < cost.Area(); ++i)
