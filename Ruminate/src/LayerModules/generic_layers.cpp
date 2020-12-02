@@ -1,5 +1,5 @@
 #pragma once
-#include "generic_layers.hpp"
+#include "LayerModules/generic_layers.hpp"
 
 namespace rum
 {
