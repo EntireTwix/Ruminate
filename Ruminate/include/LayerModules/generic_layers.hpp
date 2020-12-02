@@ -34,7 +34,7 @@ namespace rum
     public:
         DropOut(uint16_t sz, float thres);
         virtual M ForwardProp(const M &input) override;
-        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, ANN **layers, size_t index) const override;
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override;
         virtual M &internal() override;
         virtual void Learn(const M &correction) override;
     };
