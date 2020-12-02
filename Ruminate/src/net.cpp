@@ -1,5 +1,4 @@
-#pragma once
-#include <numeric>
+#include "net.hpp"
 #include "layers.hpp"
 
 namespace rum
