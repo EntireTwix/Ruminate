@@ -8,7 +8,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    virtual M Layer::ForwardProp(const M &input)
+    virtual M Layer<M>::ForwardProp(const M &input)
     {
         return input;
     }
@@ -18,7 +18,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    virtual M Layer::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const
+    virtual M Layer<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const
     {
         return cost;
     }
@@ -28,11 +28,11 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    virtual void Layer::Learn(const M &correction)
+    virtual void Layer<M>::Learn(const M &correction)
     {
         this->internal() -= correction;
     }
 
     template <typename T>
-    IActivationFuncs::IActivationFuncs(T (*a)(T), T (*ap)(T)) : Activation(a), ActivationPrime(ap) {}
+    IActivationFuncs<T>::IActivationFuncs(T (*a)(T), T (*ap)(T)) : Activation(a), ActivationPrime(ap) {}
 }; // namespace rum
