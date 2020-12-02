@@ -68,9 +68,6 @@ it should be noted that to use CUDA you lose **C++20** functionality such as **c
 to use simply compile with nvcc and will be compiled for CUDA
 ### Performance:
 Speedup can range widely depending on gpu and cpu but generally gpu does better for large matrices and cpu for small
-### Compilation:
-here is a compilation example
-```nvcc -ccbin 'path/cl.exe' --std c++17 $fileName -o $fileNameWithoutExt -IC:/Ruminate-main/ -O3 && $dir$fileNameWithoutExt"```
 ### Optimization:
 * use the program in OptimzationHeaders/CUDA called main.cu to fine tune the macro ```cpu_threshold``` in that same folder to better match the point at which your systems gpu out performs your cpu
 * compiler args found here https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
