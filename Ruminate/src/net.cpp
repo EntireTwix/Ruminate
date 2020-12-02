@@ -8,7 +8,8 @@ namespace rum
 #else
     template <LayerType T>
 #endif
-    inline NeuralNetwork<T>::NeuralNetwork(auto &&... args) : sz(sizeof...(args))
+    template <typename... Params>
+    inline NeuralNetwork<T>::NeuralNetwork(Params &&... args) : sz(sizeof...(args))
     {
         layers = new T *[sz] { args... };
     }
