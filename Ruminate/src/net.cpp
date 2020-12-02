@@ -113,7 +113,7 @@ namespace rum
 #else
     template <LayerType T>
 #endif
-    ~NeuralNetwork<T>::NeuralNetwork()
+    inline NeuralNetwork<T>::~NeuralNetwork()
     {
         for (size_t i = 0; i < sz; ++i)
         {
