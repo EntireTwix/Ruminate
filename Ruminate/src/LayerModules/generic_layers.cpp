@@ -74,7 +74,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M DropOut<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, ANN **layers, size_t index) const override
+    inline virtual M DropOut<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override
     {
         cost *= t_vals;
         return M(); //as MLMat doesnt utilize/isnt utilized by other layers
