@@ -18,7 +18,9 @@ namespace rum
 
     public:
         NeuralNetwork() = delete;
-        NeuralNetwork(auto &&... args);
+
+        template <typename... Params>
+        NeuralNetwork(Params &&... args);
 
         //thread safe
         std::vector<RT> ForwardProp(const RT &input) const;
