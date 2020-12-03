@@ -3,6 +3,6 @@ project(RuminateExamples)
 
 link_libraries(Ruminate)
 
-add_executable(addition "addition/main.cpp")
-add_executable(batchs "batchs/main.cpp")
-add_executable(dropout "dropout/main.cpp")
+add_executable(addition "addition.cpp")
+add_executable(batchs "batchs.cpp")
+add_executable(dropout "dropout.cpp")
