@@ -1,9 +1,8 @@
-cmake_minimum_required(VERSION 3.16)
-set(CMAKE_CXX_STANDARD 20)
+cmake_minimum_required(VERSION 3.13)
+project(RuminateExamples)
 
-project(Ruminate_examples)
+link_libraries(Ruminate)
 
-# Build binaries for the examples
-add_executable(Ruminate_examples ${CMAKE_CURRENT_LIST_DIR}/addition.cpp)
-add_executable(Ruminate_examples ${CMAKE_CURRENT_LIST_DIR}/batchs.cpp)
-add_executable(Ruminate_examples ${CMAKE_CURRENT_LIST_DIR}/dropout.cpp)
+add_executable(addition "addition/main.cpp")
+add_executable(batchs "batchs/main.cpp")
+add_executable(dropout "dropout/main.cpp")
