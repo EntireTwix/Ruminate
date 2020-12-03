@@ -25,7 +25,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M Input<M>::ForwardProp(const M &input) override
+    inline M Input<M>::ForwardProp(const M &input)
     {
         //std::cout << "I\n";
         //copies it as long as input matches inp's area, not nessasirly dimensions
@@ -41,7 +41,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual void Input<M>::Learn(const M &correction) override
+    inline void Input<M>::Learn(const M &correction)
     {
     } //doesnt correct
 
@@ -59,7 +59,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M DropOut<M>::ForwardProp(const M &input) override
+    inline M DropOut<M>::ForwardProp(const M &input)
     {
         M res(input.SizeX(), input.SizeY());
         for (size_t i = 0; i < input.Area(); ++i)
@@ -74,7 +74,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M DropOut<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override
+    inline M DropOut<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const
     {
         cost *= t_vals;
         return M(); //as MLMat doesnt utilize/isnt utilized by other layers
@@ -85,7 +85,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M &DropOut<M>::internal() override
+    inline M &DropOut<M>::internal()
     {
         return t_vals;
     }
@@ -95,7 +95,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual void DropOut<M>::Learn(const M &correction) override
+    inline void DropOut<M>::Learn(const M &correction)
     {
     } //doesnt correct
 
@@ -111,7 +111,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M Batch<M>::ForwardProp(const M &input) override
+    inline M Batch<M>::ForwardProp(const M &input)
     {
         typename M::type sum;
         for (typename M::storage_type i = 0; i < input.SizeY(); ++i)
