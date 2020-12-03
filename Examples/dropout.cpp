@@ -1,9 +1,9 @@
 #include <iostream>
-#include <Ruminate/net.hpp>
-#include <Ruminate/LayerModules/ann_layers.hpp>
-#include <Ruminate/LayerModules/generic_layers.hpp>
-#include <Ruminate/HelperFiles/a_funcs.hpp>
-#include <Ruminate/HelperFiles/rng_helpers.hpp>
+#include <net.hpp>
+#include <LayerModules/ann_layers.hpp>
+#include <LayerModules/generic_layers.hpp>
+#include <HelperFiles/a_funcs.hpp>
+#include <HelperFiles/rng_helpers.hpp>
 
 using namespace rum;
 
@@ -11,9 +11,9 @@ int main()
 {
 
     NeuralNetwork<ANN> net{
-        new Input(2),
+        new Input<MLMat>(2),
         new Weight(2, 3, new RngInit()),          //2x1 weights
-        new DropOut(3, 0.25),                     //25% dropout
+        new DropOut<MLMat>(3, 0.25),              //25% dropout
         new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 hidden nodes
         new Weight(3, 1, new RngInit()),          //3x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
