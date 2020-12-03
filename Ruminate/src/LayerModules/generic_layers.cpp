@@ -15,7 +15,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline virtual M &Input<M>::internal()
+    inline M &Input<M>::internal()
     {
         return inp;
     }
