@@ -1,11 +1,20 @@
 #pragma once
 #include <vector>
+
+#ifdef __NVCC__
 #include "../dependencies/CUDA/mat.hpp"
+#else
+#include "../dependencies/mat.hpp"
+#endif
 
 namespace rum
 {
     //an abstract type that is used polymorphically in net.h
+#ifdef __NVCC__
     template <typename M>
+#else
+    template <Matrix M>
+#endif
     class Layer
     {
     public:
@@ -29,4 +38,7 @@ namespace rum
     public:
         IActivationFuncs(T (*a)(T), T (*ap)(T));
     };
+
+    template <typename T>
+    concept LayerType = std::is_base_of<Layer<typename T::type>, T>::value;
 }; // namespace rum
