@@ -7,4 +7,4 @@ project(Ruminate)
 set(VENDOR_DIR ${CMAKE_CURRENT_LIST_DIR}/vendor)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Ruminate)
-add_subdirectory("Examples")
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Examples)
