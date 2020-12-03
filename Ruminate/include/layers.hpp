@@ -1,10 +1,5 @@
 #pragma once
-
 #include <vector>
-
-#ifdef __NVCC__
-#include "../depedencies/CUDA/mat.hpp"
-#pragma once
 
 #ifdef __NVCC__
 #include "../dependencies/CUDA/mat.hpp"
@@ -25,10 +20,10 @@ namespace rum
     public:
         using type = M;
 
-        virtual M ForwardProp(const M &input);
-        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const;
-        virtual void Learn(const M &correction);
-        virtual M &internal() = 0;
+        virtual M ForwardProp(const M& input);
+        virtual M BackwardProp(M& cost, const std::vector<M>& forwardRes, Layer** layers, size_t index) const;
+        virtual void Learn(const M& correction);
+        virtual M& internal() = 0;
     };
 
     template <typename T>
@@ -36,12 +31,12 @@ namespace rum
     {
     protected:
         T(*Activation)
-        (T);
+            (T);
         T(*ActivationPrime)
-        (T);
+            (T);
 
     public:
-        IActivationFuncs(T (*a)(T), T (*ap)(T));
+        IActivationFuncs(T(*a)(T), T(*ap)(T));
     };
 
     template <typename T>
