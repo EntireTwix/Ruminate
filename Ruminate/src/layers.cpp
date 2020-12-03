@@ -8,7 +8,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    virtual M Layer<M>::ForwardProp(const M &input)
+    M Layer<M>::ForwardProp(const M &input)
     {
         return input;
     }
@@ -18,7 +18,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    virtual M Layer<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const
+    M Layer<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const
     {
         return cost;
     }
@@ -28,7 +28,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    virtual void Layer<M>::Learn(const M &correction)
+    void Layer<M>::Learn(const M &correction)
     {
         this->internal() -= correction;
     }
