@@ -1,6 +1,6 @@
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
 # Ruminate v1.1.4
-an ML library that aims to be lightweight, fast, and generic. Written in and for **C++17**
+an ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
 # Usage
 ### Network Initilization Example:
@@ -63,7 +63,7 @@ and this is assuming your batch size is 1, as this library supports variable bat
 * dropout layer
 
 # :racehorse: CUDA
-it should be noted that to use CUDA you lose **C++17** functionality such as **concepts**
+it should be noted that to use CUDA you lose **C++20** functionality such as **concepts**
 ### Usage:
 to use simply compile with nvcc and will be compiled for CUDA
 ### Performance:
