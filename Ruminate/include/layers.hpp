@@ -3,9 +3,13 @@
 #include <vector>
 
 #ifdef __NVCC__
-#include "CUDA/mat.hpp"
+#include "../depedencies/CUDA/mat.hpp"
+#pragma once
+
+#ifdef __NVCC__
+#include "../dependencies/CUDA/mat.hpp"
 #else
-#include "mat.hpp"
+#include "../depedencies/mat.hpp"
 #endif
 
 namespace rum
