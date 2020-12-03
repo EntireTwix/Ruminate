@@ -1,11 +1,11 @@
 #pragma once
 #include <ctime>
-#include "../dependencies/pcg32.h"
+#include "../../vendor/pcg32/pcg32.h"
 
 #ifdef __NVCC__
-#include "../depedencies/CUDA/mat.hpp"
+#include "../../vendor/OptimizedHeaders/CUDA/mat.hpp"
 #else
-#include "../dependencies/mat.hpp"
+#include "../../vendor/OptimizedHeaders/mat.hpp"
 #endif
 
 
