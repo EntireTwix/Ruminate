@@ -1,9 +1,9 @@
 #include <iostream>
-#include <Ruminate/net.hpp>
-#include <Ruminate/LayerModules/ann_layers.hpp>
-#include <Ruminate/LayerModules/generic_layers.hpp>
-#include <Ruminate/HelperFiles/a_funcs.hpp>
-#include <Ruminate/HelperFiles/rng_helpers.hpp>
+#include <net.hpp>
+#include <LayerModules/ann_layers.hpp>
+#include <LayerModules/generic_layers.hpp>
+#include <HelperFiles/a_funcs.hpp>
+#include <HelperFiles/rng_helpers.hpp>
 
 using namespace rum;
 
