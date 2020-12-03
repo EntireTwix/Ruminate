@@ -1,10 +1,11 @@
 #pragma once
+
 #include <vector>
 
 #ifdef __NVCC__
-#include "../dependencies/CUDA/mat.hpp"
+#include "CUDA/mat.hpp"
 #else
-#include "../dependencies/mat.hpp"
+#include "mat.hpp"
 #endif
 
 namespace rum

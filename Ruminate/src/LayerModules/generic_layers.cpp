@@ -1,4 +1,3 @@
-#pragma once
 #include "LayerModules/generic_layers.hpp"
 
 namespace rum

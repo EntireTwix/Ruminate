@@ -1,11 +1,11 @@
 #pragma once
 #include <ctime>
-#include "../dependencies/pcg32.h"
+#include "pcg32.h"
 
 #ifdef __NVCC__
-#include "../dependencies/CUDA/mat.hpp"
+#include "CUDA/mat.hpp"
 #else
-#include "../dependencies/mat.hpp"
+#include "mat.hpp"
 #endif
 
 namespace rum
