@@ -4,7 +4,7 @@
 #ifdef __NVCC__
 #include "../dependencies/CUDA/mat.hpp"
 #else
-#include "../depedencies/mat.hpp"
+#include "../dependencies/mat.hpp"
 #endif
 
 namespace rum
