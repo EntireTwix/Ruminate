@@ -7,14 +7,14 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline Input<M>::Input(uint16_t input_sz) : inp(1, input_sz) = default;
+    Input<M>::Input(uint16_t input_sz) : inp(1, input_sz) = default;
 
 #ifdef __NVCC__
     template <typename M>
 #else
     template <Matrix M>
 #endif
-    inline M &Input<M>::internal()
+    M &Input<M>::internal()
     {
         return inp;
     }
@@ -24,7 +24,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline M Input<M>::ForwardProp(const M &input)
+    M Input<M>::ForwardProp(const M &input)
     {
         //std::cout << "I\n";
         //copies it as long as input matches inp's area, not nessasirly dimensions
@@ -40,7 +40,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline void Input<M>::Learn(const M &correction)
+    void Input<M>::Learn(const M &correction)
     {
     } //doesnt correct
 
@@ -49,7 +49,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline DropOut<M>::DropOut(uint16_t sz, float thres) : t_vals(sz, 1), thres(thres)
+    DropOut<M>::DropOut(uint16_t sz, float thres) : t_vals(sz, 1), thres(thres)
     {
     }
 
@@ -58,7 +58,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline M DropOut<M>::ForwardProp(const M &input)
+    M DropOut<M>::ForwardProp(const M &input)
     {
         M res(input.SizeX(), input.SizeY());
         for (size_t i = 0; i < input.Area(); ++i)
@@ -73,7 +73,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline M DropOut<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const
+    M DropOut<M>::BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const
     {
         cost *= t_vals;
         return M(); //as MLMat doesnt utilize/isnt utilized by other layers
@@ -84,7 +84,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline M &DropOut<M>::internal()
+    M &DropOut<M>::internal()
     {
         return t_vals;
     }
@@ -94,7 +94,7 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline void DropOut<M>::Learn(const M &correction)
+    void DropOut<M>::Learn(const M &correction)
     {
     } //doesnt correct
 
@@ -103,14 +103,14 @@ namespace rum
 #else
     template <Matrix M>
 #endif
-    inline Batch<M>::Batch(uint8_t batch_sz, uint16_t input_sz) : batch_sz(batch_sz), Input<M>(input_sz) = default;
+    Batch<M>::Batch(uint8_t batch_sz, uint16_t input_sz) : batch_sz(batch_sz), Input<M>(input_sz) = default;
 
 #ifdef __NVCC__
     template <typename M>
 #else
     template <Matrix M>
 #endif
-    inline M Batch<M>::ForwardProp(const M &input)
+    M Batch<M>::ForwardProp(const M &input)
     {
         typename M::type sum;
         for (typename M::storage_type i = 0; i < input.SizeY(); ++i)
