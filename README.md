@@ -85,9 +85,5 @@ to modify cuda_mat.cu's call to gpu_mat_mult to fit your gpu better
 * built in ResNet50 model
 
 # Dependencies
-* mat.hpp    from EntireTwix/OptimizedHeaders
-* generics.h from EntireTwix/MiscHeaderFiles
-* pcg32.h  from wjakob/pcg32
-* \*mat.hpp & cuda_mat.cu from EntireTwix/OptimzedHeaders/CUDA
-
-none of these dependencies have dependencies themselves so if you want you can simply individually download them
+* mat.hpp & CUDA/mat.hpp    from EntireTwix/OptimizedHeaders
+* pcg32.h                   from wjakob/pcg32
