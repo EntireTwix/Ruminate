@@ -1,9 +1,6 @@
 [submodule "vendor/OptimizedHeaders"]
 	path = vendor/OptimizedHeaders
 	url = https://github.com/EntireTwix/OptimizedHeaders
-[submodule "vendor/MiscHeaderFiles"]
-	path = vendor/MiscHeaderFiles
-	url = https://github.com/EntireTwix/MiscHeaderFiles.git
 [submodule "vendor/pcg32"]
 	path = vendor/pcg32
 	url = https://github.com/wjakob/pcg32
