@@ -9,7 +9,7 @@ namespace rum
     template <LayerType T>
 #endif
     template <typename... Params>
-    inline NeuralNetwork<T>::NeuralNetwork(Params &&... args) : sz(sizeof...(args))
+    NeuralNetwork<T>::NeuralNetwork(Params &&... args) : sz(sizeof...(args))
     {
         layers = new T *[sz] { args... };
     }
@@ -20,7 +20,7 @@ namespace rum
 #else
     template <LayerType T>
 #endif
-    inline std::vector<typename T::type> NeuralNetwork<T>::ForwardProp(const typename T::type &input) const
+    std::vector<typename T::type> NeuralNetwork<T>::ForwardProp(const typename T::type &input) const
     {
         std::vector<typename T::type> res(sz);
         res[0] = layers[0]->ForwardProp(input);
@@ -39,7 +39,7 @@ namespace rum
 #else
     template <LayerType T>
 #endif
-    inline std::vector<typename T::type> NeuralNetwork<T>::BackwordProp(const std::vector<typename T::type> &forwardRes, typename T::type &&cost_prime, float lr)
+    std::vector<typename T::type> NeuralNetwork<T>::BackwordProp(const std::vector<typename T::type> &forwardRes, typename T::type &&cost_prime, float lr)
     {
         std::vector<typename T::type> res(sz);
         typename T::type cost = cost_prime *= lr; //not optimal
