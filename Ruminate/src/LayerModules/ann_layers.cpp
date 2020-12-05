@@ -5,35 +5,35 @@ namespace rum
     using ANN = Layer<MLMat>;
 
     template <typename... Params>
-    inline Weight::Weight(uint16_t prev, uint16_t next, RngInit *rng, Params &&... saved_params) : weights(prev, next, saved_params...)
+    Weight::Weight(uint16_t prev, uint16_t next, RngInit *rng, Params &&... saved_params) : weights(prev, next, saved_params...)
     {
         rng->Generator(weights);
         delete rng;
     }
 
-    inline MLMat &Weight::internal()
+    MLMat &Weight::internal()
     {
         return weights;
     }
-    inline MLMat Weight::ForwardProp(const MLMat &input) 
+    MLMat Weight::ForwardProp(const MLMat &input) 
     {
         //std::cout << "W\n";
         return weights.Dot(input);
     }
-    inline MLMat Weight::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
+    MLMat Weight::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
     {
         //std::cout << "W\n";
         return cost.Dot(forwardRes[index - 1]);
     }
 
     template <typename... Params>
-    inline Hidden::Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), Params &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
+    Hidden::Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), Params &&... saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
 
-    inline MLMat &Hidden::internal()
+    MLMat &Hidden::internal()
     {
         return biases;
     }
-    inline MLMat Hidden::ForwardProp(const MLMat &input)
+    MLMat Hidden::ForwardProp(const MLMat &input)
     {
         //std::cout << "H\n";
         MLMat res(input.SizeX(), input.SizeY());
