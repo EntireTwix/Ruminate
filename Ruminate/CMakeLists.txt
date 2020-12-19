@@ -6,7 +6,7 @@ set(SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
 
 # Get sources
-file(GLOB_RECURSE SRC ${SOURCE_DIR}/*.cpp)
+file(GLOB_RECURSE SRC ${SOURCE_DIR}/*.cpp ${SOURCE_DIR}/HelperFiles/*.cpp ${SOURCE_DIR}/LayerModules/*.cpp)
 
 add_library(Ruminate ${SRC})
 target_include_directories(Ruminate PUBLIC ${INCLUDE_DIR})
