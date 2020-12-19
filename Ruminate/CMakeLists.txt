@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.13)
 
 project(libRuminate)
 
@@ -13,5 +13,4 @@ target_include_directories(Ruminate PUBLIC ${INCLUDE_DIR})
 
 # Libraries
 target_include_directories(Ruminate PUBLIC ${VENDOR_DIR}/pcg32)
-target_include_directories(Ruminate PUBLIC ${VENDOR_DIR}/MiscHeaderFiles)
 target_include_directories(Ruminate PUBLIC ${VENDOR_DIR}/OptimizedHeaders)
