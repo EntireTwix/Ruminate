@@ -1,3 +1,4 @@
+# [THIS PROJECT IS CURRENTLY ON HOLD AND DOES NOT WORK]
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
 # Ruminate v1.1.4
 an ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
