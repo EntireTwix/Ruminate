@@ -16,7 +16,6 @@ namespace rum
         Weight(uint16_t prev, uint16_t next, RngInit *rng, Params &&...saved_params) : weights(prev, next, saved_params...)
         {
             rng->Generator(weights);
-
             delete rng;
         }
 
@@ -67,7 +66,7 @@ namespace rum
 
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
-            cost = (cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1]); //TODO: to be optimized
+            cost = (cost.Dot(layers[index + 1]->inside()) * forwardRes[index - 1]); //TODO: to be optimized
             std::transform(cost.begin(), cost.end(), cost.begin(), ActivationPrime);
             return cost;
         }

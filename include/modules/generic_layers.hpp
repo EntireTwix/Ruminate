@@ -28,9 +28,7 @@ namespace rum
             return inp;
         }
 
-        virtual void Learn(const M &correction) override
-        {
-        } //doesnt correct
+        virtual void Learn(const M &correction) override {} //doesnt correct
     };
 
     template <Matrix M>

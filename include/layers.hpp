@@ -8,6 +8,9 @@ namespace rum
     template <Matrix M>
     class Layer
     {
+    private:
+        virtual M &internal() = 0;
+
     public:
         using type = M;
 
@@ -25,8 +28,7 @@ namespace rum
         {
             this->internal() -= correction;
         }
-
-        virtual M &internal() = 0;
+        const M &inside() { return internal(); }
     };
 
     template <typename T>
