@@ -29,7 +29,7 @@ namespace rum
             return weights.Dot(input);
         }
 
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
+        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
         {
             return cost.Dot(forwardRes[index - 1]);
         }
@@ -64,7 +64,7 @@ namespace rum
             return res;
         }
 
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
+        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
         {
             cost = (cost.Dot(layers[index + 1]->inside()) * forwardRes[index - 1]); //TODO: to be optimized
             std::transform(cost.begin(), cost.end(), cost.begin(), ActivationPrime);

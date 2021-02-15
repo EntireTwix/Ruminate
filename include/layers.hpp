@@ -9,6 +9,7 @@ namespace rum
     class Layer
     {
     private:
+        //to be used for exclusively Learn()
         virtual M &internal() = 0;
 
     public:
@@ -19,7 +20,7 @@ namespace rum
             return input;
         }
 
-        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **const layers, size_t index) const
         {
             return cost;
         }
@@ -28,6 +29,8 @@ namespace rum
         {
             this->internal() -= correction;
         }
+
+        //to be used in backprop
         const M &inside() { return internal(); }
     };
 
