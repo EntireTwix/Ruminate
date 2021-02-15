@@ -4,6 +4,8 @@
 
 namespace rum
 {
+    constexpr bool LOG_LAYERS_FLAG = false; //when toggled program will be compiled with outputs for forward and backprops for debugging
+
     //an abstract typecd  that is used polymorphically in net.h
     template <Matrix M>
     class Layer

@@ -25,11 +25,19 @@ namespace rum
 
         virtual MLMat ForwardProp(const MLMat &input) override
         {
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "W F\n";
+            }
             return weights.Dot(input);
         }
 
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
         {
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "W B\n";
+            }
             return cost.Dot(forwardRes[index - 1]);
         }
     };
@@ -50,7 +58,10 @@ namespace rum
 
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            //std::cout << "H\n";
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "H F\n";
+            }
             MLMat res(input.SizeX(), input.SizeY());
             for (uint16_t i = 0; i < input.SizeY(); ++i)
             {
@@ -65,6 +76,10 @@ namespace rum
 
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
         {
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "H B\n";
+            }
             cost = (cost.Dot(layers[index + 1]->inside()) * forwardRes[index - 1]); //TODO: to be optimized
             std::transform(cost.begin(), cost.end(), cost.begin(), ActivationPrime);
             return cost;
@@ -77,7 +92,10 @@ namespace rum
         Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
-            //std::cout << "O\n";
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "O B\n";
+            }
             for (uint32_t i = 0; i < cost.Area(); ++i)
             {
                 cost.FastAt(i) *= ActivationPrime(forwardRes[index].FastAt(i));

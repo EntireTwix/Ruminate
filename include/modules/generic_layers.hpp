@@ -11,6 +11,7 @@ namespace rum
         M inp;
 
     public:
+        Input(typename M::storage_type size) : inp(1, size){};
         virtual M &internal()
         {
             return inp;
@@ -18,8 +19,14 @@ namespace rum
 
         virtual M ForwardProp(const M &input) override
         {
-            //std::cout << "I\n";
-            inp = input;
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "I F\n";
+            }
+            for (size_t i = 0; i < inp.Area(); ++i)
+            {
+                inp.FastAt(i) = input.FastAt(i);
+            }
             return inp;
         }
 
@@ -34,19 +41,28 @@ namespace rum
         float thres;
 
     public:
-        DropOut(uint16_t sz, float thres) {}
+        DropOut(uint16_t sz, float thres) : t_vals(sz, 1), thres(thres) {}
         virtual M ForwardProp(const M &input) override
         {
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "D F\n";
+            }
             M res(input.SizeX(), input.SizeY());
             for (size_t i = 0; i < input.Area(); ++i)
             {
                 res.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = gen.nextFloat() > thres);
             }
+
             return res;
         }
 
         virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override
         {
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "D B\n";
+            }
             cost *= t_vals;
             return M(); //as MLMat doesnt utilize/isnt utilized by other layers
         }
@@ -68,9 +84,13 @@ namespace rum
         uint8_t batch_sz;
 
     public:
-        Batch(uint8_t batch_sz, uint16_t input_sz) : batch_sz(batch_sz), Input<M>(input_sz){};
+        Batch(uint8_t batch_sz, typename M::storage_type input_sz) : batch_sz(batch_sz), Input<M>(input_sz){};
         virtual M ForwardProp(const M &input) override
         {
+            if (LOG_LAYERS_FLAG)
+            {
+                std::cout << "B F\n";
+            }
             typename M::type sum;
             for (typename M::storage_type i = 0; i < input.SizeY(); ++i)
             {

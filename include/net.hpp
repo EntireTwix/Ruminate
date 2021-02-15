@@ -62,15 +62,15 @@ namespace rum
             }
         }
 
-        // std::string Save() const
-        // {
-        //     std::string res;
-        //     for (uint8_t i = 1; i < sz; ++i)
-        //     {
-        //         res += layers[i]->internal().Save() + '\n';
-        //     }
-        //     return res;
-        // }
+        std::string Save() const
+        {
+            std::string res;
+            for (uint8_t i = 1; i < sz; ++i)
+            {
+                res += layers[i]->inside().Save() + '\n';
+            }
+            return res;
+        }
 
         RT Cost(const RT &guess, const RT &anwser) const
         {

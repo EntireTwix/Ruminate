@@ -8,8 +8,8 @@ using namespace rum;
 int main()
 {
     NeuralNetwork<Layer<MLMat>> net{
-        new Input<MLMat>(),                       //2 node input
-        new Weight(2, 1, new RngInit()),          //2x1 weights
+        new Input<MLMat>(2),                      //2 node input
+        new Weight(2, 1, RngInit()),              //2x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
 
@@ -19,7 +19,7 @@ int main()
     while (1)
     {
         system("CLS");
-        //std::cout << net.Save() << '\n';
+        std::cout << net.Save() << '\n';
 
         data.At(0, 0) = gen.nextUInt(100);
         data.At(0, 1) = gen.nextUInt(100);
