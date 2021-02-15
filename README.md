@@ -81,5 +81,5 @@ and this is assuming your batch size is 1, as this library supports variable bat
 in your CMake simply add
 
 ```
-add_subdirectory(${PROJECT_NAME} Ruminate)
+target_include_directories(${PROJECT_NAME} PUBLIC third_party/Ruminate/include)
 ```

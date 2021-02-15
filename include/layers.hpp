@@ -4,7 +4,7 @@
 
 namespace rum
 {
-    //an abstract type that is used polymorphically in net.h
+    //an abstract typecd  that is used polymorphically in net.h
     template <Matrix M>
     class Layer
     {
