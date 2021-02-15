@@ -1,11 +1,8 @@
-cmake_minimum_required(VERSION 3.13)
-set(CMAKE_CXX_STANDARD 20)
+cmake_minimum_required(VERSION 3.10)
+set (CMAKE_CXX_STANDARD 20)
 
-project(Ruminate)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+#project(ruminate)
+#add_executable(${PROJECT_NAME} ${SRC} main.cpp)
 
-# Library directory
-set(VENDOR_DIR ${CMAKE_CURRENT_LIST_DIR}/vendor)
-
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Ruminate)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Examples)
+include_directories(PUBLIC include)
+include_directories(PUBLIC third_party) #for OptimizedHeaders & pcg32
