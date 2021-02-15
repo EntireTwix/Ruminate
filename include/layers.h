@@ -5,11 +5,7 @@
 namespace rum
 {
     //an abstract type that is used polymorphically in net.h
-#ifdef __NVCC__
-    template <typename M>
-#else
     template <Matrix M>
-#endif
     class Layer
     {
     public:
