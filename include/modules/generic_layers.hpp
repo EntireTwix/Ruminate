@@ -11,7 +11,6 @@ namespace rum
         M inp;
 
     public:
-        Input(uint16_t input_sz) : inp(1, input_sz){};
         virtual M &internal()
         {
             return inp;
@@ -21,10 +20,7 @@ namespace rum
         {
             //std::cout << "I\n";
             //copies it as long as input matches inp's area, not nessasirly dimensions
-            for (size_t i = 0; i < inp.Area(); ++i)
-            {
-                inp.FastAt(i) = input.FastAt(i);
-            }
+            inp = input;
             return inp;
         }
 

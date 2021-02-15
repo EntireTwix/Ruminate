@@ -8,7 +8,7 @@ using namespace rum;
 int main()
 {
     NeuralNetwork<Layer<MLMat>> net{
-        new Input<MLMat>(2),                      //2 node input
+        new Input<MLMat>(),                       //2 node input
         new Weight(2, 1, new RngInit()),          //2x1 weights
         new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
     };
