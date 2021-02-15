@@ -7,7 +7,6 @@ using namespace rum;
 
 int main()
 {
-
     NeuralNetwork<ANN> net{
         new Input<MLMat>(2),                      //2 node input
         new Weight(2, 1, new RngInit()),          //2x1 weights

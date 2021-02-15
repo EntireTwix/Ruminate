@@ -1,5 +1,4 @@
 #include "net.h"
-#include "layers.h"
 
 namespace rum
 {
@@ -45,7 +44,7 @@ namespace rum
 
     //not thread safe
     template <LayerType T>
-    inline void NeuralNetwork<T>::Learn(const std::vector<typename T::type> &backRes)
+    void NeuralNetwork<T>::Learn(const std::vector<typename T::type> &backRes)
     {
         for (uint8_t i = 0; i < sz; ++i)
         {
@@ -54,7 +53,7 @@ namespace rum
     }
 
     template <LayerType T>
-    inline std::string NeuralNetwork<T>::Save() const
+    std::string NeuralNetwork<T>::Save() const
     {
         std::string res;
         for (uint8_t i = 1; i < sz; ++i)
@@ -65,7 +64,7 @@ namespace rum
     }
 
     template <LayerType T>
-    inline typename T::type NeuralNetwork<T>::Cost(const typename T::type &guess, const typename T::type &anwser) const
+    typename T::type NeuralNetwork<T>::Cost(const typename T::type &guess, const typename T::type &anwser) const
     {
         typename T::type res(guess.SizeX(), guess.SizeY());
         for (size_t i = 0; i < guess.Area(); ++i)
@@ -76,13 +75,13 @@ namespace rum
     }
 
     template <LayerType T>
-    inline typename T::type NeuralNetwork<T>::CostPrime(const typename T::type &guess, const typename T::type &anwser) const
+    typename T::type NeuralNetwork<T>::CostPrime(const typename T::type &guess, const typename T::type &anwser) const
     {
         return guess - anwser;
     }
 
     template <LayerType T>
-    inline NeuralNetwork<T>::~NeuralNetwork()
+    NeuralNetwork<T>::~NeuralNetwork()
     {
         for (size_t i = 0; i < sz; ++i)
         {

@@ -3,7 +3,7 @@
 namespace rum
 {
     template <Matrix M>
-    Input<M>::Input(uint16_t input_sz) : inp(1, input_sz) = default;
+    Input<M>::Input(uint16_t input_sz) : inp(1, input_sz){};
 
     template <Matrix M>
     M &Input<M>::internal()
@@ -63,7 +63,7 @@ namespace rum
     } //doesnt correct
 
     template <Matrix M>
-    Batch<M>::Batch(uint8_t batch_sz, uint16_t input_sz) : batch_sz(batch_sz), Input<M>(input_sz) = default;
+    Batch<M>::Batch(uint8_t batch_sz, uint16_t input_sz) : batch_sz(batch_sz), Input<M>(input_sz){};
 
     template <Matrix M>
     M Batch<M>::ForwardProp(const M &input)

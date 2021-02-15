@@ -47,14 +47,16 @@ namespace rum
 
         return res;
     }
-    inline MLMat Hidden::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
+    MLMat Hidden::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
     {
         //std::cout << "H\n";
-        return cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1].Transform(ActivationPrime); //TODO: to be optimized
+        cost = cost.Dot(layers[index + 1]->internal()) * forwardRes[index - 1]; //TODO: to be optimized
+        std::transform(cost.begin(), cost.end(), cost.begin(), ActivationPrime);
+        return cost;
     }
 
-    inline Output::Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
-    inline MLMat Output::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
+    Output::Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
+    MLMat Output::BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const
     {
         //std::cout << "O\n";
         for (uint32_t i = 0; i < cost.Area(); ++i)
