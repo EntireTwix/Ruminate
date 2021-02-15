@@ -14,10 +14,10 @@ namespace rum
         using RT = typename T::type; //representation type, for example: fMat
 
     public:
-        NeuralNetwork() = delete;
+        NeuralNetwork() noexcept = delete;
 
         template <typename... Params>
-        NeuralNetwork(Params *&&...args) : sz(sizeof...(args))
+        NeuralNetwork(Params *&&...args) noexcept : sz(sizeof...(args))
         {
             layers = new T *[sz] { args... };
         }
@@ -62,7 +62,7 @@ namespace rum
             }
         }
 
-        std::string Save() const
+        std::string Save() const noexcept
         {
             std::string res;
             for (uint8_t i = 1; i < sz; ++i) //skipping input layer
@@ -82,7 +82,7 @@ namespace rum
             return res;
         }
 
-        RT CostPrime(const RT &guess, const RT &anwser) const
+        RT CostPrime(const RT &guess, const RT &anwser) const noexcept
         {
             return guess - anwser;
         }
