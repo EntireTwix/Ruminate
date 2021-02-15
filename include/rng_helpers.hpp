@@ -1,7 +1,7 @@
 #pragma once
 #include <ctime>
-#include "pcg32/pcg32.h"
-#include "OptimizedHeaders/mat.hpp"
+#include "../third_party/pcg32/pcg32.h"
+#include "../third_party/OptimizedHeaders/mat.hpp"
 
 namespace rum
 {

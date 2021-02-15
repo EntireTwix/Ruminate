@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "OptimizedHeaders/mat.hpp"
+#include "../third_party/OptimizedHeaders/mat.hpp"
 
 namespace rum
 {

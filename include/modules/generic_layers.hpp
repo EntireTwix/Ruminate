@@ -19,7 +19,6 @@ namespace rum
         virtual M ForwardProp(const M &input) override
         {
             //std::cout << "I\n";
-            //copies it as long as input matches inp's area, not nessasirly dimensions
             inp = input;
             return inp;
         }
