@@ -1,5 +1,3 @@
-# [THIS PROJECT IS CURRENTLY ON HOLD AND DOES NOT WORK]
-
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
 
 # Ruminate v2
