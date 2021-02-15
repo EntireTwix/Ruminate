@@ -4,7 +4,7 @@
 
 # Ruminate v2
 
-an ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
+an Header-Only ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
 # Usage
 
@@ -80,8 +80,8 @@ and this is assuming your batch size is 1, as this library supports variable bat
 
 # Build in Project
 
-in your CMake
+in your CMake simply add
 
 ```
-
+add_subdirectory(${PROJECT_NAME} Ruminate)
 ```
