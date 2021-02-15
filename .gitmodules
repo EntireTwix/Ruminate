@@ -5,7 +5,7 @@
 	path = third_party/pcg32
 	url = https://github.com/wjakob/pcg32
 [submodule "OptimizedHeaders"]
-	path = OptimizedHeaders
+	path = third_party/OptimzedHeaders
 	url = https://github.com/EntireTwix/OptimizedHeaders
 [submodule "third_party/OptimizedHeaders"]
 	path = third_party/OptimizedHeaders
