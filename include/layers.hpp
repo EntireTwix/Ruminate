@@ -11,9 +11,21 @@ namespace rum
     public:
         using type = M;
 
-        virtual M ForwardProp(const M &input);
-        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const;
-        virtual void Learn(const M &correction);
+        virtual M ForwardProp(const M &input)
+        {
+            return input;
+        }
+
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **layers, size_t index) const
+        {
+            return cost;
+        }
+
+        virtual void Learn(const M &correction)
+        {
+            this->internal() -= correction;
+        }
+
         virtual M &internal() = 0;
     };
 
@@ -27,7 +39,7 @@ namespace rum
         (T);
 
     public:
-        IActivationFuncs(T (*a)(T), T (*ap)(T));
+        IActivationFuncs(T (*a)(T), T (*ap)(T)) : Activation(a), ActivationPrime(ap) {}
     };
 
     template <typename T>

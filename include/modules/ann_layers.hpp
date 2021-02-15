@@ -1,6 +1,6 @@
 #pragma once
-#include "layers.h"
-#include "rng_helpers.h"
+#include "layers.hpp"
+#include "rng_helpers.hpp"
 
 namespace rum
 {
@@ -16,6 +16,7 @@ namespace rum
         Weight(uint16_t prev, uint16_t next, RngInit *rng, Params &&...saved_params) : weights(prev, next, saved_params...)
         {
             rng->Generator(weights);
+
             delete rng;
         }
 

@@ -1,4 +1,5 @@
-#include "a_funcs.h"
+#pragma once
+constexpr auto A = 0.0001;
 
 namespace rum
 {
@@ -73,4 +74,4 @@ namespace rum
     {
         return (exp(x) * (exp(x) + x + 1)) / std::pow(exp(x) + 1, 2);
     }
-}
+} // namespace rum
