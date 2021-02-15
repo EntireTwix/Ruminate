@@ -24,4 +24,6 @@ namespace rum
         }
     };
 
+    template <typename T>
+    concept RngGen = std::is_base_of_v<T, RngInit>;
 }; // namespace rum
