@@ -6,4 +6,5 @@ file(GLOB_RECURSE SRC "src/*.cpp")
 add_executable(${PROJECT_NAME} ${SRC} main.cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_include_directories(${PROJECT_NAME} PUBLIC third_party) #for OptimizedHeaders & pcg32g
+target_include_directories(${PROJECT_NAME} PUBLIC src/modules)
+target_include_directories(${PROJECT_NAME} PUBLIC third_party) #for OptimizedHeaders & pcg32

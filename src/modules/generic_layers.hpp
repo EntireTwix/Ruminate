@@ -1,6 +1,5 @@
 #pragma once
 #include "layers.h"
-#include "rng_helpers.h"
 
 namespace rum
 {
