@@ -13,7 +13,7 @@ namespace rum
 
     public:
         template <RngGen T, typename... Params>
-        Weight(uint16_t prev, uint16_t next, T rng, Params &&...saved_params) : weights(prev, next, saved_params...)
+        Weight(uint16_t prev, uint16_t next, T &&rng, Params &&...saved_params) : weights(prev, next, saved_params...)
         {
             rng.Generator(weights);
         }
