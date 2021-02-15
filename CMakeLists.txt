@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(ruminate)
 set (CMAKE_CXX_STANDARD 20)
 
-file(GLOB_RECURSE SRC "src/*.cpp")
+file(GLOB SRC "src/*.cpp" "src/modules/*.cpp")
 add_executable(${PROJECT_NAME} ${SRC} main.cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_include_directories(${PROJECT_NAME} PUBLIC src/modules)
 target_include_directories(${PROJECT_NAME} PUBLIC third_party) #for OptimizedHeaders & pcg32

@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <numeric>
 #include "layers.h"
 
@@ -16,7 +17,7 @@ namespace rum
         NeuralNetwork() = delete;
 
         template <typename... Params>
-        NeuralNetwork(Params &&...args);
+        NeuralNetwork(Params *&&...args);
 
         //thread safe
         std::vector<RT> ForwardProp(const RT &input) const;
@@ -26,6 +27,7 @@ namespace rum
 
         //not thread safe
         void Learn(const std::vector<RT> &backRes);
+
         std::string Save() const;
         RT Cost(const RT &guess, const RT &anwser) const;
         RT CostPrime(const RT &guess, const RT &anwser) const;

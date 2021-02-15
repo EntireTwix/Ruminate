@@ -4,7 +4,7 @@ namespace rum
 {
     template <LayerType T>
     template <typename... Params>
-    NeuralNetwork<T>::NeuralNetwork(Params &&...args) : sz(sizeof...(args))
+    NeuralNetwork<T>::NeuralNetwork(Params *&&...args) : sz(sizeof...(args))
     {
         layers = new T *[sz] { args... };
     }
