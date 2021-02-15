@@ -33,4 +33,4 @@ namespace rum
         RT CostPrime(const RT &guess, const RT &anwser) const;
         ~NeuralNetwork();
     };
-}; // namespace rum
+};

@@ -1,5 +1,4 @@
 #pragma once
 
+#include "modules/generic_layers.hpp"
 #include "net.h"
-#include "layers.h"
-#include "modules/generic_layers.h"

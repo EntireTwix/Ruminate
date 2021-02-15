@@ -5,11 +5,11 @@ using namespace rum;
 
 int main()
 {
-    NeuralNetwork<Layer<MLMat>> net{
-        new Input<MLMat>(2), //2 node input
-        // new Weight(2, 1, new RngInit()),          //2x1 weights
-        // new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
-    };
+    Input<MLMat> x(2); //2 node input
+    // NeuralNetwork<Layer<MLMat>> net{
+    //     // new Weight(2, 1, new RngInit()),          //2x1 weights
+    //     // new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
+    // };
 
     // MLMat data(1, 2);
     // MLMat anw(1, 1);

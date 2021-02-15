@@ -2,7 +2,6 @@
 
 namespace rum
 {
-    //an abstract type that is used polymorphically in net.h
     template <Matrix M>
     M Layer<M>::ForwardProp(const M &input)
     {
