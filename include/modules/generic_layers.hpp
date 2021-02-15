@@ -72,9 +72,7 @@ namespace rum
             return t_vals;
         }
 
-        virtual void Learn(const M &correction) override
-        {
-        } //doesnt correct
+        virtual void Learn(const M &correction) override {} //doesnt correct
     };
 
     template <Matrix M>

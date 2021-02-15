@@ -2,7 +2,6 @@
 #include "core.h"
 #include "modules/ann_layers.hpp"
 #include "a_funcs.hpp"
-#include "rng_helpers.hpp"
 
 using namespace rum;
 

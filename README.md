@@ -75,6 +75,7 @@ and this is assuming your batch size is 1, as this library supports variable bat
 
 - batch normalization layer
 - dropout layer
+- LOG_LAYERS_FLAG for debugging
 
 # Build in Project
 
@@ -82,4 +83,15 @@ in your CMake simply add
 
 ```
 target_include_directories(${PROJECT_NAME} PUBLIC third_party/Ruminate/include)
+```
+
+# Contributing
+
+if you want to contribute layer modules or just to use on your own project all you have to do is inheret from the Layers abstract and define forwardprop(), backprop(), and internal(), usually learn() is the same for most layer types.
+
+```
+virtual internal() = 0;
+virtual M ForwardProp(const M &input)
+virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **const layers, size_t index) const;
+virtual void Learn(const M &correction)
 ```
