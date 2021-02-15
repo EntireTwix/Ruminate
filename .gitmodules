@@ -1,6 +1,6 @@
 [submodule "src/OptimizedHeaders"]
-	path = src/OptimizedHeaders
+	path = third_party/OptimizedHeaders
 	url = https://github.com/EntireTwix/OptimizedHeaders
 [submodule "src/pcg32"]
-	path = src/pcg32
+	path = third_party/pcg32
 	url = https://github.com/wjakob/pcg32
