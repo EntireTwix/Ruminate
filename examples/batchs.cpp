@@ -22,7 +22,7 @@ int main()
 
     while (1)
     {
-        system("CLS");
+        system("clear");
         std::cout << net.Save() << '\n';
 
         for (int i = 0; i < 10; ++i)

@@ -19,7 +19,7 @@ namespace rum
 
         virtual M ForwardProp(const M &input) override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "I F\n";
             }
@@ -38,13 +38,13 @@ namespace rum
     {
     private:
         M t_vals;
-        float thres;
+        const float thres;
 
     public:
         DropOut(uint16_t sz, float thres) : t_vals(sz, 1), thres(thres) {}
         virtual M ForwardProp(const M &input) override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "D F\n";
             }
@@ -59,7 +59,7 @@ namespace rum
 
         virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "D B\n";
             }
@@ -81,13 +81,13 @@ namespace rum
     class Batch : public Input<M>
     {
     private:
-        uint8_t batch_sz;
+        const uint8_t batch_sz;
 
     public:
         Batch(uint8_t batch_sz, typename M::storage_type input_sz) : batch_sz(batch_sz), Input<M>(input_sz){};
         virtual M ForwardProp(const M &input) override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "B F\n";
             }

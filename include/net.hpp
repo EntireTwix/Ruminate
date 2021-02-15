@@ -10,7 +10,7 @@ namespace rum
     {
     private:
         T **layers = nullptr;
-        uint8_t sz;
+        const uint8_t sz;
         using RT = typename T::type; //representation type, for example: fMat
 
     public:
@@ -65,7 +65,7 @@ namespace rum
         std::string Save() const
         {
             std::string res;
-            for (uint8_t i = 1; i < sz; ++i)
+            for (uint8_t i = 1; i < sz; ++i) //skipping input layer
             {
                 res += layers[i]->inside().Save() + '\n';
             }
@@ -75,7 +75,7 @@ namespace rum
         RT Cost(const RT &guess, const RT &anwser) const
         {
             typename T::type res(guess.SizeX(), guess.SizeY());
-            for (size_t i = 0; i < guess.Area(); ++i)
+            for (size_t i = 0; i < guess.Area(); ++i) //kinda bad to keep calling Area()
             {
                 res.FastAt(i) = 0.5 * ((guess.FastAt(i) - anwser.FastAt(i)) * (guess.FastAt(i) - anwser.FastAt(i)));
             }

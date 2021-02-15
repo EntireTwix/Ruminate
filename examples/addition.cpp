@@ -18,7 +18,7 @@ int main()
 
     while (1)
     {
-        system("CLS");
+        system("clear");
         std::cout << net.Save() << '\n';
 
         data.At(0, 0) = gen.nextUInt(100);

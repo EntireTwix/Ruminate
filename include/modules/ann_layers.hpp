@@ -25,7 +25,7 @@ namespace rum
 
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "W F\n";
             }
@@ -34,7 +34,7 @@ namespace rum
 
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "W B\n";
             }
@@ -58,7 +58,7 @@ namespace rum
 
         virtual MLMat ForwardProp(const MLMat &input) override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "H F\n";
             }
@@ -76,7 +76,7 @@ namespace rum
 
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "H B\n";
             }
@@ -92,7 +92,7 @@ namespace rum
         Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
         virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
         {
-            if (LOG_LAYERS_FLAG)
+            if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "O B\n";
             }
