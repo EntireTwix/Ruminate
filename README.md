@@ -2,7 +2,7 @@
 
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
 
-# Ruminate v1.1.4
+# Ruminate v2
 
 an ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
@@ -77,3 +77,11 @@ and this is assuming your batch size is 1, as this library supports variable bat
 
 - batch normalization layer
 - dropout layer
+
+# Build in Project
+
+in your CMake
+
+```
+
+```
