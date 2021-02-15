@@ -65,7 +65,6 @@ and this is assuming your batch size is 1, as this library supports variable bat
 - :sparkles: **polymorphically** based
 - :racehorse: **fast random generator** using pcg32 implementation from https://github.com/wjakob/pcg32
 - :racehorse: Forward&Back propogation are **thread safe**
-- :racehorse: **CUDA** integration
 
 #### Essential:
 
