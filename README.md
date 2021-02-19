@@ -23,9 +23,9 @@ NeuralNetwork<ANN> net{
 
 ```cpp
 //setting inputs and anwsers
-data.At(0, 0) = gen.nextUInt(100);
-data.At(0, 1) = gen.nextUInt(100);
-anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
+data.FastAt(0) = gen.nextUInt(100); //A
+data.FastAt(1) = gen.nextUInt(100); //B
+anw.FastAt(0) = data.FastAt(0) + data.FastAt(1); //A+B
 
 //backprop with forwardprop as input
 auto corrections = net.BackwordProp(net.ForwardProp(data), net.GetCostPrime(res.back(), anw), 0.002);
