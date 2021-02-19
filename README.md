@@ -27,34 +27,14 @@ data.At(0, 0) = gen.nextUInt(100);
 data.At(0, 1) = gen.nextUInt(100);
 anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
 
-auto res = net.ForwardProp(data); //forward propogating
-auto corrections = net.BackwordProp(res, net.GetCostPrime(res.back(), anw), 0.002);
-net.Learn(corrections); //applying corrections
+//backprop with forwardprop as input
+auto corrections = net.BackwordProp(net.ForwardProp(data), net.GetCostPrime(res.back(), anw), 0.002);
+
+//applying corrections
+net.Learn(corrections);
 ```
 
-and this could be easily **multi-threaded** with something like **tpool.h** in my OptimizedHeaders repo or any other thread pool
-
-```cpp
-//Start() thread pool
-for (int i = 0; i < 10; ++i)
-{
-    pool.AddTask([i, &corrections]() {
-        data.At(0, 0) = gen.nextUInt(100);
-        data.At(0, 1) = gen.nextUInt(100);
-        anw.At(0, 0) = data.At(0, 0) + data.At(0, 1);
-
-        res = net.ForwardProp(data);
-        corrections[i] = net.BackwordProp(res, net.GetCostPrime(res.back(), anw), 0.002);
-    });
-}
-while(pool.Jobs()) {} //complete jobs
-//...
-//Learn() after averaging corrections into one vec
-```
-
-and this is assuming your batch size is 1, as this library supports variable batch size you could multi thread each batch.
-
-#### check out Examples folder for more examples
+#### check out the examples folder for more examples
 
 # Features
 
