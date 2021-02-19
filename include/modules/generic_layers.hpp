@@ -23,7 +23,7 @@ namespace rum
             {
                 std::cout << "I F\n";
             }
-            for (size_t i = 0; i < inp.Area(); ++i)
+            for (size_t i = 0; i < inp.SizeX() * inp.SizeY(); ++i)
             {
                 inp.FastAt(i) = input.FastAt(i);
             }

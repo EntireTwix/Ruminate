@@ -17,9 +17,9 @@ namespace rum
         RngInit(float lowest, float highest) : lowest(lowest), highest(highest) {}
         virtual void Generator(MLMat &mat) const
         {
-            for (uint32_t i = 0; i < mat.Area(); ++i)
+            for (auto &i : mat)
             {
-                mat.FastAt(i) = (gen.nextFloat() * this->highest) + this->lowest;
+                i = (gen.nextFloat() * this->highest) + this->lowest;
             }
         }
     };

@@ -75,7 +75,7 @@ namespace rum
         RT Cost(const RT &guess, const RT &anwser) const
         {
             typename T::type res(guess.SizeX(), guess.SizeY());
-            for (size_t i = 0; i < guess.Area(); ++i) //kinda bad to keep calling Area()
+            for (size_t i = 0; i < guess.SizeX() * guess.SizeY(); ++i) //kinda bad to keep calling Area()
             {
                 res.FastAt(i) = 0.5 * ((guess.FastAt(i) - anwser.FastAt(i)) * (guess.FastAt(i) - anwser.FastAt(i)));
             }

@@ -96,7 +96,7 @@ namespace rum
             {
                 std::cout << "O B\n";
             }
-            for (uint32_t i = 0; i < cost.Area(); ++i)
+            for (uint32_t i = 0; i < cost.SizeX() * cost.SizeY(); ++i)
             {
                 cost.FastAt(i) *= ActivationPrime(forwardRes[index].FastAt(i));
             }
