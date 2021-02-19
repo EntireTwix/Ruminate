@@ -11,10 +11,10 @@ an Header-Only ML library that aims to be lightweight, fast, and generic. Writte
 ```cpp
 NeuralNetwork<ANN> net{
      new Input<MLMat>(2),                      //2 node input
-     new Weight(2, 3, new RngInit()),          //2x1 weights
+     new Weight(2, 3, RngInit()),              //2x1 weights
      new DropOut(3, 0.25),                     //dropout of 25% of the input
      new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 node hidden layer
-     new Weight(3, 1, new RngInit()),          //3x1 weights
+     new Weight(3, 1, RngInit()),              //3x1 weights
      new Output(1, ReluLeaky, ReluLeakyPrime), //1 output node
 };
 ```
