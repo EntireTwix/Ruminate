@@ -23,7 +23,10 @@ namespace rum
             {
                 std::cout << "I F\n";
             }
-            for (size_t i = 0; i < inp.SizeX() * inp.SizeY(); ++i)
+
+            //throws if too small, concatenates if too big
+            //flattens regardless
+            for (size_t i = 0; i < (inp.SizeX() * inp.SizeY()); ++i)
             {
                 inp.FastAt(i) = input.FastAt(i);
             }
