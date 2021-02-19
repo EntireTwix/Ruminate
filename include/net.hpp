@@ -43,7 +43,7 @@ namespace rum
         }
 
         //thread safe
-        std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, RT &&cost_prime, float lr) const
+        std::vector<RT> BackwordProp(std::vector<RT> &&forwardRes, RT &&cost_prime, float lr) const
         {
             std::vector<typename T::type> res(sz);
             typename T::type cost = cost_prime *= lr; //not optimal
