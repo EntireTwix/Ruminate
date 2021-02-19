@@ -27,11 +27,17 @@ namespace rum
         {
             std::vector<typename T::type> res(sz);
             res[0] = layers[0]->ForwardProp(input);
-            //std::cout << res[0] << '\n'; //debugging
+            if constexpr (LOG_LAYERS_FLAG)
+            {
+                std::cout << res[0] << '\n'; //debugging
+            }
             for (size_t i = 1; i < res.size(); ++i)
             {
                 res[i] = layers[i]->ForwardProp(res[i - 1]); //result 1 = 1th layer propogated with 0th result
-                //std::cout << res[i] << '\n';                 //debugging
+                if constexpr (LOG_LAYERS_FLAG)
+                {
+                    std::cout << res[i] << '\n'; //debugging
+                }
             }
             return res;
         }
