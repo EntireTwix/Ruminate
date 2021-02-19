@@ -34,6 +34,9 @@ namespace rum
 
         //to be used in backprop
         const M &inside() { return internal(); }
+
+        //( ⚆ _ ⚆ ) to avoid UB
+        virtual ~Layer() {}
     };
 
     template <typename T>

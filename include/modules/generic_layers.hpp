@@ -32,7 +32,6 @@ namespace rum
             }
             return inp;
         }
-
         virtual void Learn(const M &correction) override {} //doesnt correct
     };
 
