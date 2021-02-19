@@ -1,7 +1,6 @@
 #include <iostream>
 #include "core.h"
 #include "modules/ann_layers.hpp"
-#include "a_funcs.hpp"
 
 using namespace rum;
 
