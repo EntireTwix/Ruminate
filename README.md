@@ -51,12 +51,10 @@ net.Learn(corrections);
 
 - ANN functionality
 - Activation functions: Relu, ReluLeaky, Sigmoid, Tanh, Swish
-- saving/loading functionality
-- variable batch size
 
 #### Other:
 
-- batch normalization layer
+- variable batch size support / layer
 - dropout layer
 - LOG_LAYERS_FLAG for debugging (inside layers.hpp)
 
@@ -70,13 +68,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC {path to ruminate}/include)
 
 # Contributing
 
-if you want to contribute layer modules or just to use on your own project all you have to do is inheret from the Layers abstract and define forwardprop(), backprop(), and internal(), usually learn() is the same for most layer types.
+if you want to contribute layer modules or just to use on your own project all you have to do is inheret from the Layers abstract and define forwardprop(), backprop(), and internal(), usually learn() is the same for most layer types so you rarely need to re-define it.
 
 ```cpp
 virtual internal() = 0;
-virtual M ForwardProp(const M &input)
-virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **const layers, size_t index) const;
-virtual void Learn(const M &correction)
+virtual M ForwardProp(const M &);
+virtual M BackwardProp(M&,const std::vector<M>&,Layer **const ,size_t ) const;
+virtual void Learn(const M &);
 ```
 
 and if your layer implements activation functions then inheret the IActivationFuncs interface aswell
