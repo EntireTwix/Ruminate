@@ -73,7 +73,7 @@ if you want to contribute layer modules or just to use on your own project all y
 ```cpp
 virtual internal() = 0;
 virtual M ForwardProp(const M &);
-virtual M BackwardProp(M&,const std::vector<M>&,Layer **const ,size_t ) const;
+virtual M BackwardProp(M&, const std::vector<M>&, Layer **const, size_t) const;
 virtual void Learn(const M &);
 ```
 
