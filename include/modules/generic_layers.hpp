@@ -51,7 +51,7 @@ namespace rum
                 std::cout << "D F\n";
             }
             M res(input.SizeX(), input.SizeY());
-            for (size_t i = 0; i < input.Area(); ++i)
+            for (size_t i = 0; i < (input.SizeX() * input.SizeY()); ++i)
             {
                 res.FastAt(i) = input.FastAt(i) * (t_vals.FastAt(i) = gen.nextFloat() > thres);
             }

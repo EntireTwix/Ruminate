@@ -55,7 +55,7 @@ net.Learn(corrections);
 
 - batch normalization layer
 - dropout layer
-- LOG_LAYERS_FLAG for debugging
+- LOG_LAYERS_FLAG for debugging (inside layers.hpp)
 
 # Build in Project
 
@@ -75,3 +75,5 @@ virtual M ForwardProp(const M &input)
 virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **const layers, size_t index) const;
 virtual void Learn(const M &correction)
 ```
+
+and if your layer implements activation functions then inheret the IActivationFuncs interface aswell

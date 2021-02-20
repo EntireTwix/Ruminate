@@ -55,3 +55,5 @@ namespace rum
     template <typename T>
     concept LayerType = std::is_base_of_v<Layer<typename T::type>, T>;
 } // namespace rum
+
+//TODO make all Layer func args nullable

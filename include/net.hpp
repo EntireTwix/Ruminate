@@ -10,7 +10,7 @@ namespace rum
     {
     private:
         T **layers = nullptr;
-        const uint8_t sz;
+        const uint_fast8_t sz;
         using RT = typename T::type; //representation type, for example: fMat
 
     public:
@@ -22,7 +22,14 @@ namespace rum
             layers = new T *[sz] { args... };
         }
 
-        //thread safe
+        /**
+         * @brief 
+         * Forward Propogates the given Input matrix across the network 
+         * then returns a vector of matrices containing each step
+         * (THREAD SAFE)
+         * @param input
+         * @return std::vector<Mat<T>> of steps
+         */
         std::vector<RT> ForwardProp(const RT &input) const
         {
             std::vector<typename T::type> res(sz);
@@ -42,32 +49,61 @@ namespace rum
             return res;
         }
 
-        //thread safe
-        std::vector<RT> BackwordProp(std::vector<RT> &&forwardRes, RT &&cost_prime, float lr) const
+        /**
+         * @brief Backpropogates the cost of a given ForwardProp() starting from the last layer
+         * to the first layer of the network. Each layer may modify the cost and is given the context
+         * of the forwardprops result, current layers state, and current cost.
+         * (THREAD SAFE)
+         * @param forwardRes, the result of a forward prop
+         * @param cost_prime, the error of the last anwser, caclulated with CostPrime()
+         * @param lr, the learning rate of the network, you could say how sensitive it is to change
+         * @return std::vector<RT> of corrections to be applied with Learn()
+         */
+        std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, RT &&cost_prime, float lr) const
         {
             std::vector<typename T::type> res(sz);
-            typename T::type cost = cost_prime *= lr; //not optimal
+            typename T::type cost = std::move(cost_prime *= lr); //not optimal
 
             //std::cout << "\nBackProp:\n" << cost << '\n';
             for (uint8_t i = sz - 1; i > 0; --i)
             {
                 res[i] = layers[i]->BackwardProp(cost, forwardRes, layers, i);
-                // std::cout << "{\nCorrection:\n"
-                //           << res[i] << "\nOriginal:\n"
-                //           << layers[i]->internal() << "}\n\n";
+                if (LOG_LAYERS_FLAG)
+                {
+                    std::cout << "{\nCorrection:\n"
+                              << res[i] << "\nOriginal:\n"
+                              << layers[i]->inside() << "}\n\n";
+                }
             }
             return res;
         }
 
-        //not thread safe
+        /**
+         * @brief calls each layers 
+         * Learn() function passing the corresponding correction as an arg,
+         * applying the corrections.
+         * (NOT THREAD SAFE)
+         * 
+         * @param backRes, backpropogation correction results to be applied
+         */
         void Learn(const std::vector<RT> &backRes)
         {
-            for (uint8_t i = 0; i < sz; ++i)
+            for (uint_fast8_t i = 0; i < sz; ++i)
             {
                 layers[i]->Learn(backRes[i]);
             }
         }
 
+        /**
+         * @brief a janky solution to problem of saving networks, when called this function
+         * will return a string that if copied and pasted would be the constructor for the layer
+         * it corresponds to.
+         * Ex Output: (2,1,0.999917,0.999930)
+         * Ex Paste:  new Weight(2,1,0.999917,0.999930);
+         * (TO BE REFRACTORED LATER)
+         * 
+         * @return std::string, each save is on a newline
+         */
         std::string Save() const noexcept
         {
             std::string res;
@@ -78,6 +114,13 @@ namespace rum
             return res;
         }
 
+        /**
+         * @brief returns the cost of the 0.5(guess - anwser)^2
+         * 
+         * @param guess
+         * @param anwser 
+         * @return matrix of cost 
+         */
         RT Cost(const RT &guess, const RT &anwser) const
         {
             typename T::type res(guess.SizeX(), guess.SizeY());
@@ -88,6 +131,13 @@ namespace rum
             return res;
         }
 
+        /**
+         * @brief passed to BackProp() to calculate raw cost of guess-anwser
+         * 
+         * @param guess 
+         * @param anwser 
+         * @return matrix of cost
+         */
         RT CostPrime(const RT &guess, const RT &anwser) const noexcept
         {
             return guess - anwser;
@@ -103,3 +153,5 @@ namespace rum
         }
     };
 }; // namespace rum
+
+//TODO: make forward&back prop std::array

@@ -12,11 +12,13 @@ namespace rum
         MLMat weights;
 
     public:
-        template <RngGen T, typename... Params>
-        Weight(uint16_t prev, uint16_t next, T &&rng, Params &&...saved_params) : weights(prev, next, saved_params...)
+        template <RngGen T>
+        Weight(uint16_t prev, uint16_t next, T &&rng) : weights(prev, next)
         {
             rng.Generator(weights);
         }
+        template <typename... Params>
+        Weight(uint16_t prev, uint16_t next, Params &&...saved_params) : weights(prev, next, saved_params...) {}
 
         MLMat &internal() override
         {
