@@ -27,8 +27,11 @@ data.FastAt(0) = gen.nextUInt(100); //A
 data.FastAt(1) = gen.nextUInt(100); //B
 anw.FastAt(0) = data.FastAt(0) + data.FastAt(1); //A+B
 
+//forward prop and storing as variable res
+auto res = net.ForwardProp(data);
+
 //backprop with forwardprop as input
-auto corrections = net.BackwordProp(net.ForwardProp(data), net.GetCostPrime(res.back(), anw), 0.002);
+auto corrections = net.BackwordProp(res, net.GetCostPrime(res.back(), anw), 0.002);
 
 //applying corrections
 net.Learn(corrections);
@@ -57,19 +60,19 @@ net.Learn(corrections);
 - dropout layer
 - LOG_LAYERS_FLAG for debugging (inside layers.hpp)
 
-# Build in Project
+# Use in your Project
 
 in your CMake simply add
 
 ```
-target_include_directories(${PROJECT_NAME} PUBLIC third_party/Ruminate/include)
+target_include_directories(${PROJECT_NAME} PUBLIC {path to ruminate}/include)
 ```
 
 # Contributing
 
 if you want to contribute layer modules or just to use on your own project all you have to do is inheret from the Layers abstract and define forwardprop(), backprop(), and internal(), usually learn() is the same for most layer types.
 
-```
+```cpp
 virtual internal() = 0;
 virtual M ForwardProp(const M &input)
 virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer **const layers, size_t index) const;

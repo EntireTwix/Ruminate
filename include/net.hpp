@@ -153,5 +153,3 @@ namespace rum
         }
     };
 }; // namespace rum
-
-//TODO: make forward&back prop std::array
