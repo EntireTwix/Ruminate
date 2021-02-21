@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 #include "layers.hpp"
 
 namespace rum

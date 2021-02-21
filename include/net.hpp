@@ -1,21 +1,25 @@
 #pragma once
 #include <string>
 #include <numeric>
-#include <array>
 #include "layers.hpp"
 
 namespace rum
 {
-    template <Matrix M, size_t sz>
+    template <Matrix M>
     class NeuralNetwork
     {
     private:
-        std::array<Layer<M> *, sz> layers;
+        Layer<M> **layers = nullptr;
+        const uint_fast8_t sz;
 
     public:
         NeuralNetwork() noexcept = delete;
 
-        NeuralNetwork(std::initializer_list<Layer<M> *> &&args) : layers(args) {}
+        template <typename... Params>
+        NeuralNetwork(Params *&&...args) : sz(sizeof...(args))
+        {
+            layers = new Layer<M> *[sz] { args... };
+        }
 
         /**
          * @brief 
