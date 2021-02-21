@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "../third_party/OptimizedHeaders/mat.hpp"
+#include "../third_party/half_float/umHalf.h"
 
 namespace rum
 {

@@ -4,3 +4,6 @@
 [submodule "pcg32"]
 	path = third_party/pcg32
 	url = https://github.com/wjakob/pcg32
+[submodule "third_party/half_float"]
+	path = third_party/half_float
+	url = https://github.com/acgessler/half_float
