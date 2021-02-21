@@ -4,9 +4,6 @@
 
 namespace rum
 {
-    template <Matrix M>
-    using CNN = Layer<M>;
-
     template <uint_fast8_t channels>
     struct Pixel : public std::array<uint_fast8_t, channels>
     {

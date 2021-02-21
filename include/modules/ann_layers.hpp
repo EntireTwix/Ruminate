@@ -4,12 +4,11 @@
 
 namespace rum
 {
-    using ANN = Layer<MLMat>;
-
-    class Weight : public ANN
+    template <Matrix M>
+    class Weight : public Layer<M>
     {
     protected:
-        MLMat weights;
+        M weights;
 
     public:
         template <RngGen T>
@@ -20,12 +19,12 @@ namespace rum
         template <typename... Params>
         Weight(uint16_t prev, uint16_t next, Params &&...saved_params) : weights(prev, next, saved_params...) {}
 
-        MLMat &internal() override
+        M &internal() override
         {
             return weights;
         }
 
-        virtual MLMat ForwardProp(const MLMat &input) override
+        virtual M ForwardProp(const M &input) override
         {
             if constexpr (LOG_LAYERS_FLAG)
             {
@@ -34,7 +33,7 @@ namespace rum
             return weights.Dot(input);
         }
 
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **const layers, size_t index) const override
         {
             if constexpr (LOG_LAYERS_FLAG)
             {
@@ -44,27 +43,28 @@ namespace rum
         }
     };
 
-    class Hidden : public ANN, public IActivationFuncs<float>
+    template <Matrix M>
+    class Hidden : public Layer<M>, public IActivationFuncs<typename M::type>
     {
     protected:
-        MLMat biases;
+        M biases;
 
     public:
         template <typename... Params>
-        Hidden(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float), Params &&...saved_params) : IActivationFuncs(a, ap), biases(hidden_nodes, 1, saved_params...) {}
+        Hidden(uint16_t hidden_nodes, typename M::type (*a)(typename M::type), typename M::type (*ap)(typename M::type), Params &&...saved_params) : IActivationFuncs<typename M::type>(a, ap), biases(hidden_nodes, 1, saved_params...) {}
 
-        MLMat &internal() override
+        M &internal() override
         {
             return biases;
         }
 
-        virtual MLMat ForwardProp(const MLMat &input) override
+        virtual M ForwardProp(const M &input) override
         {
             if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "H F\n";
             }
-            MLMat res(input.SizeX(), input.SizeY());
+            M res(input.SizeX(), input.SizeY());
             for (uint16_t i = 0; i < input.SizeY(); ++i)
             {
                 for (uint16_t j = 0; j < input.SizeX(); ++j)
@@ -76,23 +76,24 @@ namespace rum
             return res;
         }
 
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **const layers, size_t index) const override
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **const layers, size_t index) const override
         {
             if constexpr (LOG_LAYERS_FLAG)
             {
                 std::cout << "H B\n";
             }
             cost = (cost.Dot(layers[index + 1]->inside()) * forwardRes[index - 1]); //TODO: to be optimized
-            std::transform(cost.begin(), cost.end(), cost.begin(), ActivationPrime);
+            std::transform(cost.begin(), cost.end(), cost.begin(), this->ActivationPrime);
             return cost;
         }
     };
 
-    class Output : public Hidden
+    template <Matrix M>
+    class Output : public Hidden<M>
     {
     public:
-        Output(uint16_t hidden_nodes, float (*a)(float), float (*ap)(float)) : Hidden(hidden_nodes, a, ap) {}
-        virtual MLMat BackwardProp(MLMat &cost, const std::vector<MLMat> &forwardRes, ANN **layers, size_t index) const override
+        Output(uint16_t hidden_nodes, typename M::type (*a)(typename M::type), typename M::type (*ap)(typename M::type)) : Hidden<M>(hidden_nodes, a, ap) {}
+        virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override
         {
             if constexpr (LOG_LAYERS_FLAG)
             {
@@ -100,7 +101,7 @@ namespace rum
             }
             for (uint32_t i = 0; i < cost.SizeX() * cost.SizeY(); ++i)
             {
-                cost.FastAt(i) *= ActivationPrime(forwardRes[index].FastAt(i));
+                cost.FastAt(i) *= this->ActivationPrime(forwardRes[index].FastAt(i));
             }
             return cost;
         }

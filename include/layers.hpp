@@ -51,7 +51,4 @@ namespace rum
     public:
         IActivationFuncs(T (*a)(T), T (*ap)(T)) : Activation(a), ActivationPrime(ap) {}
     };
-
-    template <typename T>
-    concept LayerType = std::is_base_of_v<Layer<typename T::type>, T>;
 } // namespace rum

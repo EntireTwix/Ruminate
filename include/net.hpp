@@ -1,38 +1,34 @@
 #pragma once
 #include <string>
 #include <numeric>
+#include <array>
 #include "layers.hpp"
 
 namespace rum
 {
-    template <LayerType T>
+    template <Matrix M, size_t sz>
     class NeuralNetwork
     {
     private:
-        T **layers = nullptr;
-        const uint_fast8_t sz;
-        using RT = typename T::type; //representation type, for example: fMat
+        std::array<Layer<M> *, sz> layers;
 
     public:
         NeuralNetwork() noexcept = delete;
 
-        template <typename... Params>
-        NeuralNetwork(Params *&&...args) noexcept : sz(sizeof...(args))
-        {
-            layers = new T *[sz] { args... };
-        }
+        NeuralNetwork(std::initializer_list<Layer<M> *> &&args) : layers(args) {}
 
         /**
          * @brief 
          * Forward Propogates the given Input matrix across the network 
          * then returns a vector of matrices containing each step
          * (THREAD SAFE)
+         * 
          * @param input
          * @return std::vector<Mat<T>> of steps
          */
-        std::vector<RT> ForwardProp(const RT &input) const
+        std::vector<M> ForwardProp(const M &input) const
         {
-            std::vector<typename T::type> res(sz);
+            std::vector<M> res(sz);
             res[0] = layers[0]->ForwardProp(input);
             if constexpr (LOG_LAYERS_FLAG)
             {
@@ -50,19 +46,20 @@ namespace rum
         }
 
         /**
-         * @brief Backpropogates the cost of a given ForwardProp() starting from the last layer
+         * @brief Backpropogates the cost of a given ForwardProp() staMing from the last layer
          * to the first layer of the network. Each layer may modify the cost and is given the context
          * of the forwardprops result, current layers state, and current cost.
          * (THREAD SAFE)
+         * 
          * @param forwardRes, the result of a forward prop
          * @param cost_prime, the error of the last anwser, caclulated with CostPrime()
          * @param lr, the learning rate of the network, you could say how sensitive it is to change
-         * @return std::vector<RT> of corrections to be applied with Learn()
+         * @return std::vector<M> of corrections to be applied with Learn()
          */
-        std::vector<RT> BackwordProp(const std::vector<RT> &forwardRes, RT &&cost_prime, float lr) const
+        std::vector<M> BackwordProp(const std::vector<M> &forwardRes, M &&cost_prime, float lr) const
         {
-            std::vector<typename T::type> res(sz);
-            typename T::type cost = std::move(cost_prime *= lr); //not optimal
+            std::vector<M> res(sz);
+            M cost = std::move(cost_prime *= lr); //not optimal
 
             //std::cout << "\nBackProp:\n" << cost << '\n';
             for (uint8_t i = sz - 1; i > 0; --i)
@@ -86,7 +83,7 @@ namespace rum
          * 
          * @param backRes, backpropogation correction results to be applied
          */
-        void Learn(const std::vector<RT> &backRes)
+        void Learn(const std::vector<M> &backRes)
         {
             for (uint_fast8_t i = 0; i < sz; ++i)
             {
@@ -121,9 +118,9 @@ namespace rum
          * @param anwser 
          * @return matrix of cost 
          */
-        RT Cost(const RT &guess, const RT &anwser) const
+        M Cost(const M &guess, const M &anwser) const
         {
-            typename T::type res(guess.SizeX(), guess.SizeY());
+            M res(guess.SizeX(), guess.SizeY());
             for (size_t i = 0; i < guess.SizeX() * guess.SizeY(); ++i) //kinda bad to keep calling Area()
             {
                 res.FastAt(i) = 0.5 * ((guess.FastAt(i) - anwser.FastAt(i)) * (guess.FastAt(i) - anwser.FastAt(i)));
@@ -138,7 +135,7 @@ namespace rum
          * @param anwser 
          * @return matrix of cost
          */
-        RT CostPrime(const RT &guess, const RT &anwser) const noexcept
+        M CostPrime(const M &guess, const M &anwser) const noexcept
         {
             return guess - anwser;
         }
