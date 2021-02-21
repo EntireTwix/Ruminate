@@ -7,7 +7,7 @@ using namespace rum;
 int main()
 {
 
-    NeuralNetwork<ANN> net{
+    NeuralNetwork<MLMat> net{
         new Batch<MLMat>(10, 2),                  //batch input of 10
         new Weight(2, 3, RngInit()),              //2x1 weights
         new Hidden(3, ReluLeaky, ReluLeakyPrime), //3 hidden nodes

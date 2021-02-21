@@ -8,7 +8,7 @@ using namespace rum;
 int main()
 {
 
-    NeuralNetwork<ANN> net{
+    NeuralNetwork<MLMat> net{
         new Input<MLMat>(2),
         new Weight(2, 3, RngInit()),              //2x1 weights
         new DropOut<MLMat>(3, 0.25),              //25% dropout
