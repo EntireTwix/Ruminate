@@ -60,7 +60,7 @@ namespace rum
          * @param lr, the learning rate of the network, you could say how sensitive it is to change
          * @return std::vector<M> of corrections to be applied with Learn()
          */
-        std::vector<M> BackwordProp(const std::vector<M> &forwardRes, M &&cost_prime, float lr) const
+        std::vector<M> BackwordProp(const std::vector<M> &forwardRes, M &&cost_prime, const float lr) const
         {
             std::vector<M> res(sz);
             M cost = std::move(cost_prime *= lr); //not optimal
