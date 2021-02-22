@@ -122,7 +122,7 @@ namespace rum
          * @param anwser 
          * @return matrix of cost 
          */
-        M Cost(const M &guess, const M &anwser) const
+        static M Cost(const M &guess, const M &anwser)
         {
             M res(guess.SizeX(), guess.SizeY());
             for (size_t i = 0; i < guess.SizeX() * guess.SizeY(); ++i) //kinda bad to keep calling Area()
@@ -139,7 +139,7 @@ namespace rum
          * @param anwser 
          * @return matrix of cost
          */
-        M CostPrime(const M &guess, const M &anwser) const noexcept
+        static M CostPrime(const M &guess, const M &anwser) noexcept
         {
             return guess - anwser;
         }

@@ -12,9 +12,9 @@ namespace rum
 
     public:
         Input(typename M::storage_type size) : inp(1, size){};
-        virtual M &internal()
+        virtual M *internal()
         {
-            return inp;
+            return nullptr;
         }
 
         virtual M ForwardProp(const M &input) override
@@ -69,7 +69,7 @@ namespace rum
             return M(); //as MLMat doesnt utilize/isnt utilized by other layers
         }
 
-        virtual M &internal() override
+        virtual M *internal() override
         {
             return t_vals;
         }

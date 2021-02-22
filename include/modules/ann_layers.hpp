@@ -20,9 +20,9 @@ namespace rum
         template <typename... Params>
         Weight(uint_fast16_t prev, uint_fast16_t next, Params &&...saved_params) : weights(prev, next, saved_params...) {}
 
-        M &internal() override
+        M *internal() override
         {
-            return weights;
+            return &weights;
         }
 
         virtual M ForwardProp(const M &input) override
@@ -54,9 +54,9 @@ namespace rum
         template <typename... Params>
         Hidden(uint_fast16_t hidden_nodes, typename M::type (*a)(typename M::type), typename M::type (*ap)(typename M::type), Params &&...saved_params) : IActivationFuncs<typename M::type>(a, ap), biases(hidden_nodes, 1, saved_params...) {}
 
-        M &internal() override
+        M *internal() override
         {
-            return biases;
+            return &biases;
         }
 
         virtual M ForwardProp(const M &input) override

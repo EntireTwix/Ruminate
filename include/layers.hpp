@@ -15,7 +15,7 @@ namespace rum
     {
     private:
         //to be used for exclusively Learn()
-        virtual M &internal() = 0;
+        virtual M *internal() = 0;
 
     public:
         using type = M;
@@ -32,11 +32,11 @@ namespace rum
 
         virtual void Learn(const M &correction)
         {
-            this->internal() -= correction;
+            (*this->internal()) -= correction;
         }
 
         //to be used in backprop
-        const M &inside() { return internal(); }
+        const M &inside() { return *internal(); }
 
         //( ⚆ _ ⚆ ) to avoid UB
         virtual ~Layer() {}

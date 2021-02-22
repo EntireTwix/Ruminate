@@ -33,4 +33,28 @@ namespace rum
 
     using RGB = Mat<Pixel<3>>;
     using RGBA = Mat<Pixel<4>>;
+
+    template <Matrix M = RGB>
+    class Flatten : public Layer<M>
+    {
+    public:
+        Flatten() {}
+        virtual M *internal()
+        {
+            return nullptr;
+        }
+
+        virtual M ForwardProp(const M &input) override
+        {
+            if constexpr (LOG_LAYERS_FLAG)
+            {
+                std::cout << "F F\n";
+            }
+
+            M temp = input;
+            temp.Flatten();
+            return temp;
+        }
+        virtual void Learn(const M &correction) override {} //doesnt correct
+    };
 };
