@@ -94,6 +94,9 @@ namespace rum
     {
     public:
         Output(uint_fast16_t hidden_nodes, typename M::type (*a)(typename M::type), typename M::type (*ap)(typename M::type)) : Hidden<M>(hidden_nodes, a, ap) {}
+
+        template <typename... Params>
+        Output(uint_fast16_t hidden_nodes, typename M::type (*a)(typename M::type), typename M::type (*ap)(typename M::type), Params &&...saved_params) : Hidden<M>(hidden_nodes, a, ap, saved_params...) {}
         virtual M BackwardProp(M &cost, const std::vector<M> &forwardRes, Layer<M> **layers, size_t index) const override
         {
             if constexpr (LOG_LAYERS_FLAG)
