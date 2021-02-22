@@ -6,7 +6,7 @@ namespace rum
     template <uint_fast8_t channels>
     struct Pixel : public std::array<uint_fast8_t, channels>
     {
-        Pixel operator-=(const Pixel &p)
+        Pixel operator-=(Pixel p)
         {
             Pixel res;
             for (uint_fast8_t i = 0; i < channels; ++i)
@@ -15,7 +15,7 @@ namespace rum
             }
             return res;
         }
-        friend std::ostream &operator<<(std::ostream &os, const Pixel &p)
+        friend std::ostream &operator<<(std::ostream &os, Pixel p)
         {
             os << '(';
             for (uint_fast8_t i = 0; i < channels; ++i)
