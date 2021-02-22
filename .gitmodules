@@ -7,3 +7,9 @@
 [submodule "third_party/half_float"]
 	path = third_party/half_float
 	url = https://github.com/acgessler/half_float
+[submodule "half"]
+	path = half
+	url = https://github.com/EntireTwix/half
+[submodule "third_party/half"]
+	path = third_party/half
+	url = https://github.com/EntireTwix/half

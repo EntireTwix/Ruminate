@@ -100,7 +100,7 @@ namespace rum
             {
                 std::cout << "O B\n";
             }
-            for (uint32_t i = 0; i < cost.SizeX() * cost.SizeY(); ++i)
+            for (size_t i = 0; i < cost.SizeX() * cost.SizeY(); ++i)
             {
                 cost.FastAt(i) *= this->ActivationPrime(forwardRes[index].FastAt(i));
             }

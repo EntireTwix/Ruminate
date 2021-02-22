@@ -1,11 +1,11 @@
 #pragma once
 #include <vector>
 #include "../third_party/OptimizedHeaders/mat.hpp"
-#include "../third_party/half_float/umHalf.h"
+#include "../third_party/half/half.hpp"
 
 namespace rum
 {
-    using MLMat = Mat<float>;
+    using MLMat = Mat<FLOAT16, uint_fast16_t>;
 
     constexpr bool LOG_LAYERS_FLAG = false; //when toggled program will be compiled with outputs for forward and backprops for debugging
 
