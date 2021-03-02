@@ -34,6 +34,17 @@ namespace rum
     using RGB = Mat<Pixel<3>>;
     using RGBA = Mat<Pixel<4>>;
 
+    // template <Matrix M = RGB>
+    // class KernelWeights
+    // {
+    // protected:
+    //     using SizeT = typename M::storage_type;
+    //     M weights;
+
+    // public:
+    //     Kernel(SizeT width, SizeT height) : weights(width, height) {}
+    // };
+
     template <Matrix M = RGB>
     class Flatten : public Layer<M>
     {

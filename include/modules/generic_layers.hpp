@@ -9,9 +9,10 @@ namespace rum
     {
     protected:
         M inp;
+        using SizeT = typename M::storage_type;
 
     public:
-        Input(typename M::storage_type size) : inp(1, size){};
+        Input(SizeT size) : inp(1, size){};
         virtual M *internal()
         {
             return nullptr;
@@ -41,9 +42,10 @@ namespace rum
     private:
         M t_vals;
         const float thres;
+        using SizeT = typename M::storage_type;
 
     public:
-        DropOut(uint16_t sz, float thres) : t_vals(sz, 1), thres(thres) {}
+        DropOut(SizeT sz, float thres) : t_vals(sz, 1), thres(thres) {}
         virtual M ForwardProp(const M &input) override
         {
             if constexpr (LOG_LAYERS_FLAG)
@@ -81,10 +83,11 @@ namespace rum
     class Batch : public Input<M>
     {
     private:
-        const uint8_t batch_sz;
+        using SizeT = typename M::storage_type;
+        const SizeT batch_sz;
 
     public:
-        Batch(uint8_t batch_sz, typename M::storage_type input_sz) : batch_sz(batch_sz), Input<M>(input_sz){};
+        Batch(SizeT batch_sz, typename M::storage_type input_sz) : batch_sz(batch_sz), Input<M>(input_sz){};
         virtual M ForwardProp(const M &input) override
         {
             if constexpr (LOG_LAYERS_FLAG)
