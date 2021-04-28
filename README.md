@@ -2,7 +2,7 @@
 
 # Ruminate v2
 
-an Header-Only ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
+a Header-Only ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
 # Usage
 
