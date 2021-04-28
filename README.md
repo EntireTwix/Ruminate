@@ -1,6 +1,6 @@
 ![Ruminate Logo](https://github.com/EntireTwix/Ruminate/blob/main/Banner.png)
 
-# Ruminate v2 (TEMPORARY DISCONTINUED DUE TO LOW COMPARATIVE UTILITY)
+# Ruminate v2 (TEMPORARY DISCONTINUED)
 
 a Header-Only ML library that aims to be lightweight, fast, and generic. Written in and for **C++20**
 
